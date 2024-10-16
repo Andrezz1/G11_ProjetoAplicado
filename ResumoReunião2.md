@@ -1,15 +1,15 @@
-Registo de Pedidos:
+# Registo de Pedidos
 
 Não será permitida a realização de pedidos , tudo será distribuído conforme disponibilidade.
 
 O registo do levantamento será feito através do nome, contacto, nacionalidade e quantidade de pessoas do agregado familiar(mostrando a quantidade de crinças e adultos).
 
 
-Controlo de Visitas:
+# Controlo de Visitas
 
 Será importante de controlar o numero de visitas feitas por cada pessoa(a pessoa será registada com se ela fosse o agregado familiar)
 
-Acesso à informação:
+# Acesso à informação
 
 Fazer uma agenda para organizar os voluntarios. Os voluntarios assim podem escolher e registar se para "trabalhar".
 
