@@ -1,14 +1,11 @@
 
-
 # UserLogin
 
 ## Properties
-
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**username** | **String** |  | 
-**password** | **String** |  | 
-
+| Name | Type | Description | Notes |
+| ------------ | ------------- | ------------- | ------------- |
+| **username** | **kotlin.String** |  |  |
+| **password** | **kotlin.String** |  |  |
 
 
 

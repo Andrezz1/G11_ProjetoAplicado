@@ -2,84 +2,88 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**visitasGet**](VisitasApi.md#visitasGet) | **GET** /Visitas | 
-[**visitasIdDelete**](VisitasApi.md#visitasIdDelete) | **DELETE** /Visitas/{id} | 
-[**visitasIdGet**](VisitasApi.md#visitasIdGet) | **GET** /Visitas/{id} | 
-[**visitasIdPut**](VisitasApi.md#visitasIdPut) | **PUT** /Visitas/{id} | 
-[**visitasPost**](VisitasApi.md#visitasPost) | **POST** /Visitas | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**visitasGet**](VisitasApi.md#visitasGet) | **GET** /Visitas |  |
+| [**visitasIdDelete**](VisitasApi.md#visitasIdDelete) | **DELETE** /Visitas/{id} |  |
+| [**visitasIdGet**](VisitasApi.md#visitasIdGet) | **GET** /Visitas/{id} |  |
+| [**visitasIdPut**](VisitasApi.md#visitasIdPut) | **PUT** /Visitas/{id} |  |
+| [**visitasPost**](VisitasApi.md#visitasPost) | **POST** /Visitas |  |
 
 
-
-## visitasGet
-
-> List&lt;Visita&gt; visitasGet()
+<a id="visitasGet"></a>
+# **visitasGet**
+> kotlin.collections.List&lt;Visita&gt; visitasGet()
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.VisitasApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-VisitasApi apiInstance = new VisitasApi();
+val apiInstance = VisitasApi()
 try {
-    List<Visita> result = apiInstance.visitasGet();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling VisitasApi#visitasGet");
-    e.printStackTrace();
+    val result : kotlin.collections.List<Visita> = apiInstance.visitasGet()
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling VisitasApi#visitasGet")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling VisitasApi#visitasGet")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;Visita&gt;**](Visita.md)
+[**kotlin.collections.List&lt;Visita&gt;**](Visita.md)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
-
-## visitasIdDelete
-
+<a id="visitasIdDelete"></a>
+# **visitasIdDelete**
 > visitasIdDelete(id)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.VisitasApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-VisitasApi apiInstance = new VisitasApi();
-Integer id = null; // Integer | 
+val apiInstance = VisitasApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
 try {
-    apiInstance.visitasIdDelete(id);
-} catch (ApiException e) {
-    System.err.println("Exception when calling VisitasApi#visitasIdDelete");
-    e.printStackTrace();
+    apiInstance.visitasIdDelete(id)
+} catch (e: ClientException) {
+    println("4xx response calling VisitasApi#visitasIdDelete")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling VisitasApi#visitasIdDelete")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **kotlin.Int**|  | |
 
 ### Return type
 
@@ -87,43 +91,46 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
-
-## visitasIdGet
-
+<a id="visitasIdGet"></a>
+# **visitasIdGet**
 > Visita visitasIdGet(id)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.VisitasApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-VisitasApi apiInstance = new VisitasApi();
-Integer id = null; // Integer | 
+val apiInstance = VisitasApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
 try {
-    Visita result = apiInstance.visitasIdGet(id);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling VisitasApi#visitasIdGet");
-    e.printStackTrace();
+    val result : Visita = apiInstance.visitasIdGet(id)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling VisitasApi#visitasIdGet")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling VisitasApi#visitasIdGet")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **kotlin.Int**|  | |
 
 ### Return type
 
@@ -131,44 +138,47 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
-
-## visitasIdPut
-
+<a id="visitasIdPut"></a>
+# **visitasIdPut**
 > visitasIdPut(id, visita)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.VisitasApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-VisitasApi apiInstance = new VisitasApi();
-Integer id = null; // Integer | 
-Visita visita = new Visita(); // Visita | 
+val apiInstance = VisitasApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
+val visita : Visita =  // Visita | 
 try {
-    apiInstance.visitasIdPut(id, visita);
-} catch (ApiException e) {
-    System.err.println("Exception when calling VisitasApi#visitasIdPut");
-    e.printStackTrace();
+    apiInstance.visitasIdPut(id, visita)
+} catch (e: ClientException) {
+    println("4xx response calling VisitasApi#visitasIdPut")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling VisitasApi#visitasIdPut")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
- **visita** | [**Visita**](Visita.md)|  | [optional]
+| **id** | **kotlin.Int**|  | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **visita** | [**Visita**](Visita.md)|  | [optional] |
 
 ### Return type
 
@@ -176,43 +186,46 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
 
-
-## visitasPost
-
+<a id="visitasPost"></a>
+# **visitasPost**
 > Visita visitasPost(visita)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.VisitasApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-VisitasApi apiInstance = new VisitasApi();
-Visita visita = new Visita(); // Visita | 
+val apiInstance = VisitasApi()
+val visita : Visita =  // Visita | 
 try {
-    Visita result = apiInstance.visitasPost(visita);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling VisitasApi#visitasPost");
-    e.printStackTrace();
+    val result : Visita = apiInstance.visitasPost(visita)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling VisitasApi#visitasPost")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling VisitasApi#visitasPost")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **visita** | [**Visita**](Visita.md)|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **visita** | [**Visita**](Visita.md)|  | [optional] |
 
 ### Return type
 
@@ -220,10 +233,13 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 

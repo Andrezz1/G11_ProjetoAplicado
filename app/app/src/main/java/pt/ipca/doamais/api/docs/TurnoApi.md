@@ -2,88 +2,91 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**turnoGet**](TurnoApi.md#turnoGet) | **GET** /Turno | 
-[**turnoIdDelete**](TurnoApi.md#turnoIdDelete) | **DELETE** /Turno/{id} | 
-[**turnoIdGet**](TurnoApi.md#turnoIdGet) | **GET** /Turno/{id} | 
-[**turnoIdPut**](TurnoApi.md#turnoIdPut) | **PUT** /Turno/{id} | 
-[**turnoPost**](TurnoApi.md#turnoPost) | **POST** /Turno | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**turnoGet**](TurnoApi.md#turnoGet) | **GET** /Turno |  |
+| [**turnoIdDelete**](TurnoApi.md#turnoIdDelete) | **DELETE** /Turno/{id} |  |
+| [**turnoIdGet**](TurnoApi.md#turnoIdGet) | **GET** /Turno/{id} |  |
+| [**turnoIdPut**](TurnoApi.md#turnoIdPut) | **PUT** /Turno/{id} |  |
+| [**turnoPost**](TurnoApi.md#turnoPost) | **POST** /Turno |  |
 
 
-
-## turnoGet
-
-> List&lt;Turno&gt; turnoGet(id)
+<a id="turnoGet"></a>
+# **turnoGet**
+> kotlin.collections.List&lt;Turno&gt; turnoGet(id)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.TurnoApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-TurnoApi apiInstance = new TurnoApi();
-Integer id = null; // Integer | 
+val apiInstance = TurnoApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
 try {
-    List<Turno> result = apiInstance.turnoGet(id);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling TurnoApi#turnoGet");
-    e.printStackTrace();
+    val result : kotlin.collections.List<Turno> = apiInstance.turnoGet(id)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling TurnoApi#turnoGet")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling TurnoApi#turnoGet")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [optional] [default to null]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **kotlin.Int**|  | [optional] |
 
 ### Return type
 
-[**List&lt;Turno&gt;**](Turno.md)
+[**kotlin.collections.List&lt;Turno&gt;**](Turno.md)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
-
-## turnoIdDelete
-
+<a id="turnoIdDelete"></a>
+# **turnoIdDelete**
 > turnoIdDelete(id)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.TurnoApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-TurnoApi apiInstance = new TurnoApi();
-Integer id = null; // Integer | 
+val apiInstance = TurnoApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
 try {
-    apiInstance.turnoIdDelete(id);
-} catch (ApiException e) {
-    System.err.println("Exception when calling TurnoApi#turnoIdDelete");
-    e.printStackTrace();
+    apiInstance.turnoIdDelete(id)
+} catch (e: ClientException) {
+    println("4xx response calling TurnoApi#turnoIdDelete")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling TurnoApi#turnoIdDelete")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **kotlin.Int**|  | |
 
 ### Return type
 
@@ -91,43 +94,46 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
-
-## turnoIdGet
-
+<a id="turnoIdGet"></a>
+# **turnoIdGet**
 > Turno turnoIdGet(id)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.TurnoApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-TurnoApi apiInstance = new TurnoApi();
-Integer id = null; // Integer | 
+val apiInstance = TurnoApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
 try {
-    Turno result = apiInstance.turnoIdGet(id);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling TurnoApi#turnoIdGet");
-    e.printStackTrace();
+    val result : Turno = apiInstance.turnoIdGet(id)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling TurnoApi#turnoIdGet")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling TurnoApi#turnoIdGet")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **kotlin.Int**|  | |
 
 ### Return type
 
@@ -135,44 +141,47 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
-
-## turnoIdPut
-
+<a id="turnoIdPut"></a>
+# **turnoIdPut**
 > turnoIdPut(id, turno)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.TurnoApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-TurnoApi apiInstance = new TurnoApi();
-String id = null; // String | 
-Turno turno = new Turno(); // Turno | 
+val apiInstance = TurnoApi()
+val id : kotlin.String = id_example // kotlin.String | 
+val turno : Turno =  // Turno | 
 try {
-    apiInstance.turnoIdPut(id, turno);
-} catch (ApiException e) {
-    System.err.println("Exception when calling TurnoApi#turnoIdPut");
-    e.printStackTrace();
+    apiInstance.turnoIdPut(id, turno)
+} catch (e: ClientException) {
+    println("4xx response calling TurnoApi#turnoIdPut")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling TurnoApi#turnoIdPut")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
- **turno** | [**Turno**](Turno.md)|  | [optional]
+| **id** | **kotlin.String**|  | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **turno** | [**Turno**](Turno.md)|  | [optional] |
 
 ### Return type
 
@@ -180,54 +189,60 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
 
-
-## turnoPost
-
-> Object turnoPost(turno)
+<a id="turnoPost"></a>
+# **turnoPost**
+> kotlin.Any turnoPost(turno)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.TurnoApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-TurnoApi apiInstance = new TurnoApi();
-Turno turno = new Turno(); // Turno | 
+val apiInstance = TurnoApi()
+val turno : Turno =  // Turno | 
 try {
-    Object result = apiInstance.turnoPost(turno);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling TurnoApi#turnoPost");
-    e.printStackTrace();
+    val result : kotlin.Any = apiInstance.turnoPost(turno)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling TurnoApi#turnoPost")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling TurnoApi#turnoPost")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **turno** | [**Turno**](Turno.md)|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **turno** | [**Turno**](Turno.md)|  | [optional] |
 
 ### Return type
 
-**Object**
+[**kotlin.Any**](kotlin.Any.md)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 

@@ -2,84 +2,88 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**levantamentosGet**](LevantamentosApi.md#levantamentosGet) | **GET** /Levantamentos | 
-[**levantamentosIdDelete**](LevantamentosApi.md#levantamentosIdDelete) | **DELETE** /Levantamentos/{id} | 
-[**levantamentosIdGet**](LevantamentosApi.md#levantamentosIdGet) | **GET** /Levantamentos/{id} | 
-[**levantamentosIdPut**](LevantamentosApi.md#levantamentosIdPut) | **PUT** /Levantamentos/{id} | 
-[**levantamentosPost**](LevantamentosApi.md#levantamentosPost) | **POST** /Levantamentos | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**levantamentosGet**](LevantamentosApi.md#levantamentosGet) | **GET** /Levantamentos |  |
+| [**levantamentosIdDelete**](LevantamentosApi.md#levantamentosIdDelete) | **DELETE** /Levantamentos/{id} |  |
+| [**levantamentosIdGet**](LevantamentosApi.md#levantamentosIdGet) | **GET** /Levantamentos/{id} |  |
+| [**levantamentosIdPut**](LevantamentosApi.md#levantamentosIdPut) | **PUT** /Levantamentos/{id} |  |
+| [**levantamentosPost**](LevantamentosApi.md#levantamentosPost) | **POST** /Levantamentos |  |
 
 
-
-## levantamentosGet
-
-> List&lt;Levantamento&gt; levantamentosGet()
+<a id="levantamentosGet"></a>
+# **levantamentosGet**
+> kotlin.collections.List&lt;Levantamento&gt; levantamentosGet()
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.LevantamentosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-LevantamentosApi apiInstance = new LevantamentosApi();
+val apiInstance = LevantamentosApi()
 try {
-    List<Levantamento> result = apiInstance.levantamentosGet();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling LevantamentosApi#levantamentosGet");
-    e.printStackTrace();
+    val result : kotlin.collections.List<Levantamento> = apiInstance.levantamentosGet()
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling LevantamentosApi#levantamentosGet")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling LevantamentosApi#levantamentosGet")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;Levantamento&gt;**](Levantamento.md)
+[**kotlin.collections.List&lt;Levantamento&gt;**](Levantamento.md)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
-
-## levantamentosIdDelete
-
+<a id="levantamentosIdDelete"></a>
+# **levantamentosIdDelete**
 > levantamentosIdDelete(id)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.LevantamentosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-LevantamentosApi apiInstance = new LevantamentosApi();
-Integer id = null; // Integer | 
+val apiInstance = LevantamentosApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
 try {
-    apiInstance.levantamentosIdDelete(id);
-} catch (ApiException e) {
-    System.err.println("Exception when calling LevantamentosApi#levantamentosIdDelete");
-    e.printStackTrace();
+    apiInstance.levantamentosIdDelete(id)
+} catch (e: ClientException) {
+    println("4xx response calling LevantamentosApi#levantamentosIdDelete")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling LevantamentosApi#levantamentosIdDelete")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **kotlin.Int**|  | |
 
 ### Return type
 
@@ -87,43 +91,46 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
-
-## levantamentosIdGet
-
+<a id="levantamentosIdGet"></a>
+# **levantamentosIdGet**
 > Levantamento levantamentosIdGet(id)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.LevantamentosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-LevantamentosApi apiInstance = new LevantamentosApi();
-Integer id = null; // Integer | 
+val apiInstance = LevantamentosApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
 try {
-    Levantamento result = apiInstance.levantamentosIdGet(id);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling LevantamentosApi#levantamentosIdGet");
-    e.printStackTrace();
+    val result : Levantamento = apiInstance.levantamentosIdGet(id)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling LevantamentosApi#levantamentosIdGet")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling LevantamentosApi#levantamentosIdGet")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **kotlin.Int**|  | |
 
 ### Return type
 
@@ -131,44 +138,47 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
-
-## levantamentosIdPut
-
+<a id="levantamentosIdPut"></a>
+# **levantamentosIdPut**
 > levantamentosIdPut(id, levantamento)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.LevantamentosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-LevantamentosApi apiInstance = new LevantamentosApi();
-Integer id = null; // Integer | 
-Levantamento levantamento = new Levantamento(); // Levantamento | 
+val apiInstance = LevantamentosApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
+val levantamento : Levantamento =  // Levantamento | 
 try {
-    apiInstance.levantamentosIdPut(id, levantamento);
-} catch (ApiException e) {
-    System.err.println("Exception when calling LevantamentosApi#levantamentosIdPut");
-    e.printStackTrace();
+    apiInstance.levantamentosIdPut(id, levantamento)
+} catch (e: ClientException) {
+    println("4xx response calling LevantamentosApi#levantamentosIdPut")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling LevantamentosApi#levantamentosIdPut")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
- **levantamento** | [**Levantamento**](Levantamento.md)|  | [optional]
+| **id** | **kotlin.Int**|  | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **levantamento** | [**Levantamento**](Levantamento.md)|  | [optional] |
 
 ### Return type
 
@@ -176,43 +186,46 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
 
-
-## levantamentosPost
-
+<a id="levantamentosPost"></a>
+# **levantamentosPost**
 > Levantamento levantamentosPost(levantamento)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.LevantamentosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-LevantamentosApi apiInstance = new LevantamentosApi();
-Levantamento levantamento = new Levantamento(); // Levantamento | 
+val apiInstance = LevantamentosApi()
+val levantamento : Levantamento =  // Levantamento | 
 try {
-    Levantamento result = apiInstance.levantamentosPost(levantamento);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling LevantamentosApi#levantamentosPost");
-    e.printStackTrace();
+    val result : Levantamento = apiInstance.levantamentosPost(levantamento)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling LevantamentosApi#levantamentosPost")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling LevantamentosApi#levantamentosPost")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **levantamento** | [**Levantamento**](Levantamento.md)|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **levantamento** | [**Levantamento**](Levantamento.md)|  | [optional] |
 
 ### Return type
 
@@ -220,10 +233,13 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 

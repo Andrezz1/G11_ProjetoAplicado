@@ -2,84 +2,88 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**beneficiariosGet**](BeneficiariosApi.md#beneficiariosGet) | **GET** /Beneficiarios | 
-[**beneficiariosIdDelete**](BeneficiariosApi.md#beneficiariosIdDelete) | **DELETE** /Beneficiarios/{id} | 
-[**beneficiariosIdGet**](BeneficiariosApi.md#beneficiariosIdGet) | **GET** /Beneficiarios/{id} | 
-[**beneficiariosIdPut**](BeneficiariosApi.md#beneficiariosIdPut) | **PUT** /Beneficiarios/{id} | 
-[**beneficiariosPost**](BeneficiariosApi.md#beneficiariosPost) | **POST** /Beneficiarios | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**beneficiariosGet**](BeneficiariosApi.md#beneficiariosGet) | **GET** /Beneficiarios |  |
+| [**beneficiariosIdDelete**](BeneficiariosApi.md#beneficiariosIdDelete) | **DELETE** /Beneficiarios/{id} |  |
+| [**beneficiariosIdGet**](BeneficiariosApi.md#beneficiariosIdGet) | **GET** /Beneficiarios/{id} |  |
+| [**beneficiariosIdPut**](BeneficiariosApi.md#beneficiariosIdPut) | **PUT** /Beneficiarios/{id} |  |
+| [**beneficiariosPost**](BeneficiariosApi.md#beneficiariosPost) | **POST** /Beneficiarios |  |
 
 
-
-## beneficiariosGet
-
-> List&lt;Beneficiario&gt; beneficiariosGet()
+<a id="beneficiariosGet"></a>
+# **beneficiariosGet**
+> kotlin.collections.List&lt;Beneficiario&gt; beneficiariosGet()
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.BeneficiariosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-BeneficiariosApi apiInstance = new BeneficiariosApi();
+val apiInstance = BeneficiariosApi()
 try {
-    List<Beneficiario> result = apiInstance.beneficiariosGet();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling BeneficiariosApi#beneficiariosGet");
-    e.printStackTrace();
+    val result : kotlin.collections.List<Beneficiario> = apiInstance.beneficiariosGet()
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling BeneficiariosApi#beneficiariosGet")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling BeneficiariosApi#beneficiariosGet")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;Beneficiario&gt;**](Beneficiario.md)
+[**kotlin.collections.List&lt;Beneficiario&gt;**](Beneficiario.md)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
-
-## beneficiariosIdDelete
-
+<a id="beneficiariosIdDelete"></a>
+# **beneficiariosIdDelete**
 > beneficiariosIdDelete(id)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.BeneficiariosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-BeneficiariosApi apiInstance = new BeneficiariosApi();
-Integer id = null; // Integer | 
+val apiInstance = BeneficiariosApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
 try {
-    apiInstance.beneficiariosIdDelete(id);
-} catch (ApiException e) {
-    System.err.println("Exception when calling BeneficiariosApi#beneficiariosIdDelete");
-    e.printStackTrace();
+    apiInstance.beneficiariosIdDelete(id)
+} catch (e: ClientException) {
+    println("4xx response calling BeneficiariosApi#beneficiariosIdDelete")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling BeneficiariosApi#beneficiariosIdDelete")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **kotlin.Int**|  | |
 
 ### Return type
 
@@ -87,43 +91,46 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
-
-## beneficiariosIdGet
-
+<a id="beneficiariosIdGet"></a>
+# **beneficiariosIdGet**
 > Beneficiario beneficiariosIdGet(id)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.BeneficiariosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-BeneficiariosApi apiInstance = new BeneficiariosApi();
-Integer id = null; // Integer | 
+val apiInstance = BeneficiariosApi()
+val id : kotlin.Int = 56 // kotlin.Int | 
 try {
-    Beneficiario result = apiInstance.beneficiariosIdGet(id);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling BeneficiariosApi#beneficiariosIdGet");
-    e.printStackTrace();
+    val result : Beneficiario = apiInstance.beneficiariosIdGet(id)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling BeneficiariosApi#beneficiariosIdGet")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling BeneficiariosApi#beneficiariosIdGet")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Integer**|  | [default to null]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **kotlin.Int**|  | |
 
 ### Return type
 
@@ -131,44 +138,47 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
-
-## beneficiariosIdPut
-
+<a id="beneficiariosIdPut"></a>
+# **beneficiariosIdPut**
 > beneficiariosIdPut(id, beneficiario)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.BeneficiariosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-BeneficiariosApi apiInstance = new BeneficiariosApi();
-String id = null; // String | 
-Beneficiario beneficiario = new Beneficiario(); // Beneficiario | 
+val apiInstance = BeneficiariosApi()
+val id : kotlin.String = id_example // kotlin.String | 
+val beneficiario : Beneficiario =  // Beneficiario | 
 try {
-    apiInstance.beneficiariosIdPut(id, beneficiario);
-} catch (ApiException e) {
-    System.err.println("Exception when calling BeneficiariosApi#beneficiariosIdPut");
-    e.printStackTrace();
+    apiInstance.beneficiariosIdPut(id, beneficiario)
+} catch (e: ClientException) {
+    println("4xx response calling BeneficiariosApi#beneficiariosIdPut")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling BeneficiariosApi#beneficiariosIdPut")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
- **beneficiario** | [**Beneficiario**](Beneficiario.md)|  | [optional]
+| **id** | **kotlin.String**|  | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **beneficiario** | [**Beneficiario**](Beneficiario.md)|  | [optional] |
 
 ### Return type
 
@@ -176,54 +186,60 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
 
-
-## beneficiariosPost
-
-> Object beneficiariosPost(beneficiario)
+<a id="beneficiariosPost"></a>
+# **beneficiariosPost**
+> kotlin.Any beneficiariosPost(beneficiario)
 
 
 
 ### Example
-
-```java
+```kotlin
 // Import classes:
-//import pt.ipca.doamais.api.api.BeneficiariosApi;
+//import org.openapitools.client.infrastructure.*
+//import pt.ipca.doamais.api.model.*
 
-BeneficiariosApi apiInstance = new BeneficiariosApi();
-Beneficiario beneficiario = new Beneficiario(); // Beneficiario | 
+val apiInstance = BeneficiariosApi()
+val beneficiario : Beneficiario =  // Beneficiario | 
 try {
-    Object result = apiInstance.beneficiariosPost(beneficiario);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling BeneficiariosApi#beneficiariosPost");
-    e.printStackTrace();
+    val result : kotlin.Any = apiInstance.beneficiariosPost(beneficiario)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling BeneficiariosApi#beneficiariosPost")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling BeneficiariosApi#beneficiariosPost")
+    e.printStackTrace()
 }
 ```
 
 ### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **beneficiario** | [**Beneficiario**](Beneficiario.md)|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **beneficiario** | [**Beneficiario**](Beneficiario.md)|  | [optional] |
 
 ### Return type
 
-**Object**
+[**kotlin.Any**](kotlin.Any.md)
 
 ### Authorization
 
-[ApiKey](../README.md#ApiKey)
+
+Configure ApiKey:
+    ApiClient.apiKey["Authorization"] = ""
+    ApiClient.apiKeyPrefix["Authorization"] = ""
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 

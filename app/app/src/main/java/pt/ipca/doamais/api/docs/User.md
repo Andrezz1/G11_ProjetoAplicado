@@ -1,18 +1,15 @@
 
-
 # User
 
 ## Properties
-
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **Integer** |  |  [optional]
-**username** | **String** |  | 
-**name** | **String** |  | 
-**password** | **String** |  |  [optional]
-**role** | **String** |  | 
-**createdOn** | [**Date**](Date.md) |  |  [optional]
-
+| Name | Type | Description | Notes |
+| ------------ | ------------- | ------------- | ------------- |
+| **username** | **kotlin.String** |  |  |
+| **name** | **kotlin.String** |  |  |
+| **role** | **kotlin.String** |  |  |
+| **id** | **kotlin.Int** |  |  [optional] |
+| **password** | **kotlin.String** |  |  [optional] |
+| **createdOn** | [**java.time.OffsetDateTime**](java.time.OffsetDateTime.md) |  |  [optional] |
 
 
 

@@ -10,7 +10,7 @@ val apiDescriptionFile = "$rootDir/app/src/main/openapi.json"
 val apiRootName = "pt.ipca.doamais.api"
 
 openApiGenerate {
-    generatorName.set("android")
+    generatorName.set("kotlin")
     inputSpec.set(apiDescriptionFile)
     outputDir.set(generatedSourcesPath)
     apiPackage.set("$apiRootName.api")

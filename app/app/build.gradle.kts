@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,7 +9,7 @@ plugins {
 
 android {
     namespace = "pt.ipca.doamais"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "pt.ipca.doamais"
@@ -46,7 +48,7 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/{AL2.0,LGPL2.1,DEPENDENCIES}"
         }
     }
 }
@@ -61,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.espresso.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,4 +80,12 @@ dependencies {
         exclude(group = "org.apache.httpcomponents", module = "httpclient")
     }
     implementation(libs.volley)
+    // define a BOM and its version
+    implementation(platform(libs.okhttp.bom))
+
+    // define any required OkHttp artifacts without version
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
 }
