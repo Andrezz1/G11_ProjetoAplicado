@@ -20,6 +20,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pt.ipca.doamais.api.api.UsersApi
 import pt.ipca.doamais.api.model.UserLogin
 
@@ -64,16 +68,20 @@ fun Login(innerPadding: PaddingValues) {
 }
 
 fun handleLogin(username: String, password: String): Boolean {
-    val apiInstance = UsersApi()
-    val userLogin = UserLogin(username, password)
-    Log.i("Login", "Logging in with username: $username, password: $password")
-    try {
-        val result = apiInstance.usersLoginPost(userLogin)
-        Log.i("Login", "Login successful: $result")
-        return true
-    } catch (e: Error) {
-        System.err.println("Exception when calling UsersApi#usersLoginPost")
-        e.printStackTrace()
+    var loginSuccessful = false
+    CoroutineScope(Dispatchers.IO).launch {
+        val apiInstance = UsersApi("http://192.168.68.109:80")
+        val userLogin = UserLogin(username, password)
+        Log.i("Login", "Logging in with username: $username, password: $password")
+        try {
+            val result = apiInstance.usersLoginPost(userLogin)
+            Log.i("Login", "Login successful: $result")
+            withContext(Dispatchers.Main) {
+                loginSuccessful = true
+            }
+        } catch (e: Error) {
+            Log.e("Login", "Exception when calling UsersApi#usersLoginPost", e)
+        }
     }
-    return false
+    return loginSuccessful
 }
