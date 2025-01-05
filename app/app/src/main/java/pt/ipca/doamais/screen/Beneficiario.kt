@@ -20,7 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import pt.ipca.doamais.R // Certifique-se de usar o nome correto do pacote do projeto
-import pt.ipca.doamais.ui.theme.DoaTheme
+import pt.ipca.doamais.ui.theme.AppTheme
 
 @Composable
 fun BeneficiariosScreen(navController: NavController) {
@@ -96,7 +96,7 @@ fun BeneficiariosScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun BeneficiariosScreenPreview() {
-    DoaTheme {
+    AppTheme {
         BeneficiariosScreen(navController = NavController(context = LocalContext.current))
     }
 }

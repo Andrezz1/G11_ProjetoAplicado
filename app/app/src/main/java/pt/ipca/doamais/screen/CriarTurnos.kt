@@ -14,7 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import pt.ipca.doamais.ui.theme.DoaTheme
+import pt.ipca.doamais.ui.theme.AppTheme
 
 @Composable
 fun CriarTurnosScreen(navController: NavController) {
@@ -102,7 +102,7 @@ fun CriarTurnosScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun CriarTurnosScreenPreview() {
-    DoaTheme {
+    AppTheme {
         CriarTurnosScreen(navController = NavController(LocalContext.current))
     }
 }

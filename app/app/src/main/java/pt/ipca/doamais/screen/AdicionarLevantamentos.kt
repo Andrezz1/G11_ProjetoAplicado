@@ -15,7 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import pt.ipca.doamais.ui.theme.DoaTheme
+import pt.ipca.doamais.ui.theme.AppTheme
 
 @Composable
 fun AdicionarLevantamentoScreen(navController: NavController) {
@@ -96,7 +96,7 @@ fun AdicionarLevantamentoScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun AdicionarLevantamentoScreenPreview() {
-    DoaTheme {
+    AppTheme {
         AdicionarLevantamentoScreen(navController = NavController(context = LocalContext.current))
     }
 }

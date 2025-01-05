@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import pt.ipca.doamais.ui.theme.DoaTheme
+import pt.ipca.doamais.ui.theme.AppTheme
 
 data class Beneficiario(val id: Int, val nome: String, val idade: Int)
 
@@ -64,7 +64,7 @@ fun BeneficiarioItem(beneficiario: Beneficiario) {
 @Preview(showBackground = true)
 @Composable
 fun ListaBeneficiariosScreenPreview() {
-    DoaTheme {
+    AppTheme {
         ListaBeneficiariosScreen(navController = NavController(context = LocalContext.current))
     }
 }

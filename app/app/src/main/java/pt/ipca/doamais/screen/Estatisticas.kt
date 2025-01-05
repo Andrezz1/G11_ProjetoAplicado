@@ -1,5 +1,6 @@
 package pt.ipca.doamais.screen
 
+import android.content.Context
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -10,18 +11,30 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import pt.ipca.doamais.R
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
-import pt.ipca.doamais.ui.theme.DoaTheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import org.openapitools.client.infrastructure.ApiClient
+import org.openapitools.client.infrastructure.ClientException
+import org.openapitools.client.infrastructure.ServerException
+import pt.ipca.doamais.R
+import pt.ipca.doamais.api.api.BeneficiariosApi
+import pt.ipca.doamais.api.api.VisitasApi
+import pt.ipca.doamais.api.model.Beneficiario
+import pt.ipca.doamais.api.model.Visita
+import pt.ipca.doamais.ui.theme.AppTheme
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Base64
+import java.util.Date
+import java.util.Locale
 
 // ViewModel para gerenciar os dados da tela
 class EstatisticasViewModel : androidx.lifecycle.ViewModel() {
@@ -65,14 +78,8 @@ fun EstatisticasScreen(navController: NavController, viewModel: EstatisticasView
         )
 
         // Total de visitas
-        Text(
-            text = "Visitas",
-            style = androidx.compose.ui.text.TextStyle(color = Color.Black, fontSize = 18.sp)
-        )
-        Text(
-            text = "3702", // Você pode também tornar este valor dinâmico
-            style = androidx.compose.ui.text.TextStyle(color = Color.Black, fontSize = 18.sp)
-        )
+        Text("Visitas")
+        Text("3702")
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -103,7 +110,8 @@ fun EstatisticasScreen(navController: NavController, viewModel: EstatisticasView
         Text(
             text = "Nacionalidades",
             textAlign = TextAlign.Center,
-            style = androidx.compose.ui.text.TextStyle(color = Color.Black, fontSize = 18.sp)
+            fontSize = 18.sp
+            //style = androidx.compose.ui.text.TextStyle(color = Color.Black, fontSize = 18.sp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -204,7 +212,61 @@ fun BarChart(nacionalidades: List<Nacionalidade>, modifier: Modifier = Modifier)
 @Preview(showBackground = true)
 @Composable
 fun EstatisticasScreenPreview() {
-    DoaTheme {
+    AppTheme {
         EstatisticasScreen(navController = NavController(context = LocalContext.current))
     }
+}
+
+fun getData(context: Context, navController: NavController) {
+
+    val (savedUsername, savedPassword) = getCredentials(context)
+    if (savedUsername == null || savedPassword == null) {
+        println("Credenciais não encontradas")
+        navController.navigate("login")
+        return
+    }
+    var apikey = "$savedUsername;$savedPassword"
+    apikey = Base64.getEncoder().encodeToString(apikey.toByteArray())
+    ApiClient.apiKey["Authorization"] = apikey
+    val apiVisitaInstance = VisitasApi()
+    val visitasResult : List<Visita>
+    try {
+        visitasResult = apiVisitaInstance.visitasGet()
+        println(visitasResult)
+    } catch (e: ClientException) {
+        println("4xx response calling VisitasApi#visitasGet")
+        e.printStackTrace()
+    } catch (e: ServerException) {
+        println("5xx response calling VisitasApi#visitasGet")
+        e.printStackTrace()
+    }
+
+
+    val benResult : List<Beneficiario>
+    val apiBeneficiarioInstance = BeneficiariosApi()
+    try {
+        benResult = apiBeneficiarioInstance.beneficiariosGet()
+        println(benResult)
+    } catch (e: ClientException) {
+        println("4xx response calling BeneficiariosApi#beneficiariosGet")
+        e.printStackTrace()
+    } catch (e: ServerException) {
+        println("5xx response calling BeneficiariosApi#beneficiariosGet")
+        e.printStackTrace()
+    }
+
+    // Count the number of visits in the last 6 months
+    // Read the visitas and ignore the ones that are not in the last 6 months
+    val visits = mutableListOf<Float>()
+    val months = mutableListOf<String>()
+    val dateFormat: DateFormat = SimpleDateFormat("MM", Locale.ENGLISH)
+    val date: Date = Date()
+
+    //for (i in 0..5) {
+    //    val month = date.month - i
+    //    val visitsInMonth = visitasResult.filter { dateFormat.format(it.data).toInt() == month }
+    //    visits.add(visitsInMonth.size.toFloat())
+    //    months.add(dateFormat.format(month).toString())
+    //}
+
 }

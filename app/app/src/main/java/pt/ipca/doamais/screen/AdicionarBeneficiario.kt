@@ -1,6 +1,5 @@
 package pt.ipca.doamais.screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -18,13 +17,13 @@ import pt.ipca.doamais.api.api.BeneficiariosApi
 import pt.ipca.doamais.api.model.Beneficiario
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import pt.ipca.doamais.ui.theme.DoaTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
+import pt.ipca.doamais.ui.theme.AppTheme
 import pt.ipca.doamais.R
 
 
@@ -166,7 +165,7 @@ fun handleAdicionarBeneficiario(
 @Preview(showBackground = true)
 @Composable
 fun AdicionarBeneficiarioScreenPreview() {
-    DoaTheme {
+    AppTheme {
         AdicionarBeneficiarioScreen(navController = NavController(context = LocalContext.current))
     }
 }
