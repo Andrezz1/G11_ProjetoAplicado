@@ -1,21 +1,31 @@
 package pt.ipca.doamais.screen
 
 import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import pt.ipca.doamais.R
 import pt.ipca.doamais.api.api.UsersApi
 import pt.ipca.doamais.api.model.UserLogin
+
 
 @Composable
 fun Login(innerPadding: PaddingValues, navController: NavController) {
@@ -24,62 +34,92 @@ fun Login(innerPadding: PaddingValues, navController: NavController) {
     var isLoggingIn by remember { mutableStateOf(false) }
     var loginError by remember { mutableStateOf<String?>(null) }
 
+    // Tela principal
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
             .padding(16.dp),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Username field
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Username") },
-            modifier = Modifier.fillMaxWidth()
+        // Logotipo
+        Image(
+            painter = painterResource(id = R.drawable.imagem_loja_social),
+            contentDescription = "Loja Social",
+            modifier = Modifier
+                .height(120.dp)
+                .padding(bottom = 32.dp), // Espaço abaixo do logotipo
+            contentScale = ContentScale.Fit
         )
-        Spacer(modifier = Modifier.height(16.dp))
 
-        // Password field
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation()
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Login button
-        Button(
-            onClick = {
-                isLoggingIn = true
-                loginError = null
-                Log.i("Login", "Username: $username, Password: $password")
-                handleLogin(username, password, navController, onLoginSuccess = {
-                    isLoggingIn = false
-                    // Navigate to home screen on success
-                    navController.navigate("home") {
-                        popUpTo("login") { inclusive = true } // Remove login screen from the stack
-                    }
-                }, onLoginError = {
-                    isLoggingIn = false
-                    loginError = "Login failed. Please try again."
-                })
-            },
-            modifier = Modifier.fillMaxWidth()
+        // Caixa de login (fundo cinza)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .background(Color(0xFFE0E0E0)) // Cor cinza claro
+                .padding(16.dp)
         ) {
-            Text("Login")
-        }
+            // Título da seção
+            Text(
+                text = "Login",
+                fontSize = 20.sp,
+                color = Color.Black,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
 
-        // Show loading state while logging in
-        if (isLoggingIn) {
-            Text("Logging in...", modifier = Modifier.padding(top = 16.dp))
-        }
+            // Campo de nome de usuário
+            OutlinedTextField(
+                value = username,
+                onValueChange = { username = it },
+                label = { Text("Nome") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
 
-        // Show error message if login failed
-        if (loginError != null) {
-            Text(loginError!!, color = androidx.compose.ui.graphics.Color.Red, modifier = Modifier.padding(top = 16.dp))
+            // Campo de senha
+            OutlinedTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text("Palavra-Passe") },
+                modifier = Modifier.fillMaxWidth(),
+                visualTransformation = PasswordVisualTransformation()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Botão de login
+            Button(
+                onClick = {
+                    isLoggingIn = true
+                    loginError = null
+                    handleLogin(username, password, navController, onLoginSuccess = {
+                        isLoggingIn = false
+                        navController.navigate("home") {
+                            popUpTo("login") { inclusive = true }
+                        }
+                    }, onLoginError = {
+                        isLoggingIn = false
+                        loginError = "Erro ao fazer login. Tente novamente."
+                    })
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text("Login")
+            }
+
+            // Mensagem de erro
+            if (loginError != null) {
+                Text(
+                    text = loginError!!,
+                    color = Color.Red,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
         }
     }
 }

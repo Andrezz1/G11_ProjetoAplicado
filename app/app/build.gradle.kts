@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "pt.ipca.doamais"
-        minSdk = 31
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
