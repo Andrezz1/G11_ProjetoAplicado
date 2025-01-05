@@ -1,5 +1,6 @@
 package pt.ipca.doamais.screen
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,9 +29,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import org.openapitools.client.infrastructure.ApiClient
+import org.openapitools.client.infrastructure.ClientException
+import org.openapitools.client.infrastructure.ServerException
 import pt.ipca.doamais.ui.theme.AppTheme
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Base64
 
 @Composable
 fun AdicionarLevantamentoScreen(navController: NavController) {
@@ -41,6 +46,7 @@ fun AdicionarLevantamentoScreen(navController: NavController) {
     var createdBy by remember { mutableStateOf("") }
     var erro by remember { mutableStateOf<String?>(null) }
     var isSaving by remember { mutableStateOf(false) }
+    var context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -90,7 +96,7 @@ fun AdicionarLevantamentoScreen(navController: NavController) {
             value = dataLevantamento,
             onValueChange = { dataLevantamento = it },
             label = { Text("Data do Levantamento") },
-            placeholder = { Text("Ex: 2025-01-05") },
+            placeholder = { Text("Ex: 25-01-2025") },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -115,6 +121,7 @@ fun AdicionarLevantamentoScreen(navController: NavController) {
                     tipoBens = tipoBens,
                     dataLevantamento = dataLevantamento,
                     createdBy = createdBy.toIntOrNull() ?: 0,
+                    context = context,
                     navController = navController,
                     onSuccess = {
                         isSaving = false
@@ -157,23 +164,56 @@ fun AdicionarLevantamentoScreen(navController: NavController) {
     }
 }
 
+fun formatarData(data: String): String {
+    return try {
+        // Divide a string em partes (dia, mês, ano)
+        val partes = data.split("-")
+        if (partes.size != 3) throw IllegalArgumentException("Formato de data inválido. Use 'dd-MM-yyyy'.")
+
+        // Adiciona zeros à esquerda no dia e no mês, se necessário
+        val dia = partes[0].padStart(2, '0')
+        val mes = partes[1].padStart(2, '0')
+        val ano = partes[2]
+
+        // Retorna a data formatada
+        "$dia-$mes-$ano"
+    } catch (e: Exception) {
+        throw IllegalArgumentException("Erro ao formatar a data: ${e.message}")
+    }
+}
+
+
 fun handleAdicionarLevantamento(
     beneficiarioId: Int,
     tipoBens: String,
     dataLevantamento: String,
     createdBy: Int,
     navController: NavController,
+    context: Context,
     onSuccess: () -> Unit,
     onError: () -> Unit
 ) {
     CoroutineScope(Dispatchers.IO).launch {
+        val (savedUsername, savedPassword) = getCredentials(context)
+        if (savedUsername == null || savedPassword == null) {
+            println("Credenciais não encontradas")
+            navController.navigate("login")
+            return@launch
+        }
+        var apikey = "$savedUsername;$savedPassword"
+        apikey = Base64.getEncoder().encodeToString(apikey.toByteArray())
+        ApiClient.apiKey["Authorization"] = apikey
+
         val apiInstance = LevantamentosApi("http://188.245.242.57/")
 
         try {
+
+            val dataFormatada = formatarData(dataLevantamento)
             // Converter a string fornecida para OffsetDateTime
-            val dataLevantamentoOffsetDateTime = OffsetDateTime.parse(
-                dataLevantamento,
-                DateTimeFormatter.ISO_OFFSET_DATE_TIME // Formato esperado pela API
+            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+            val dataLevantamentoOffsetDateTime = OffsetDateTime.of(
+                java.time.LocalDate.parse(dataFormatada, formatter).atStartOfDay(),
+                java.time.ZoneOffset.UTC
             )
 
             // Criar o objeto Levantamento com a data convertida
@@ -190,9 +230,14 @@ fun handleAdicionarLevantamento(
 
             // Notificar sucesso
             withContext(Dispatchers.Main) { onSuccess() }
-        } catch (e: Exception) {
-            // Notificar erro
+        } catch (e: ClientException) {
+            println("4xx response calling VisitasApi#visitasGet")
             withContext(Dispatchers.Main) { onError() }
+            e.printStackTrace()
+        } catch (e: ServerException) {
+            println("5xx response calling VisitasApi#visitasGet")
+            withContext(Dispatchers.Main) { onError() }
+            e.printStackTrace()
         }
     }
 }
