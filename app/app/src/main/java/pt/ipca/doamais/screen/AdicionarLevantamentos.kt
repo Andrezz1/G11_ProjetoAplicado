@@ -46,7 +46,7 @@ fun AdicionarLevantamentoScreen(navController: NavController) {
     var createdBy by remember { mutableStateOf("") }
     var erro by remember { mutableStateOf<String?>(null) }
     var isSaving by remember { mutableStateOf(false) }
-    var context = LocalContext.current
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier

@@ -1,37 +1,32 @@
 package pt.ipca.doamais.screen
 
 import android.content.Context
-import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import pt.ipca.doamais.api.api.BeneficiariosApi
-import pt.ipca.doamais.api.model.Beneficiario
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.sp
 import org.openapitools.client.infrastructure.ApiClient
 import org.openapitools.client.infrastructure.ClientException
 import org.openapitools.client.infrastructure.ServerException
-import pt.ipca.doamais.ui.theme.AppTheme
 import pt.ipca.doamais.R
+import pt.ipca.doamais.api.api.BeneficiariosApi
+import pt.ipca.doamais.api.model.Beneficiario
+import pt.ipca.doamais.ui.theme.AppTheme
 import java.util.Base64
-
 
 @Composable
 fun AdicionarBeneficiarioScreen(navController: NavController) {
@@ -40,9 +35,11 @@ fun AdicionarBeneficiarioScreen(navController: NavController) {
     var contacto by remember { mutableStateOf("") }
     var nacionalidade by remember { mutableStateOf("") }
     var dimensaoAgregado by remember { mutableStateOf("") }
+    var notas by remember { mutableStateOf("") }
+    var referencia by remember { mutableStateOf("") }
     var erro by remember { mutableStateOf<String?>(null) }
     var isSaving by remember { mutableStateOf(false) }
-    var context = LocalContext.current
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -101,6 +98,22 @@ fun AdicionarBeneficiarioScreen(navController: NavController) {
             modifier = Modifier.fillMaxWidth()
         )
 
+        // Campo Notas
+        OutlinedTextField(
+            value = notas,
+            onValueChange = { notas = it },
+            label = { Text("Notas") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Campo Referência
+        OutlinedTextField(
+            value = referencia,
+            onValueChange = { referencia = it },
+            label = { Text("Referência") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
         Spacer(modifier = Modifier.height(16.dp))
 
         // Botão Registrar
@@ -113,6 +126,8 @@ fun AdicionarBeneficiarioScreen(navController: NavController) {
                     contacto = contacto,
                     nacionalidade = nacionalidade,
                     dimensaoAgregado = dimensaoAgregado.toIntOrNull() ?: 0,
+                    notas = notas,
+                    referencia = referencia,
                     context = context,
                     navController = navController,
                     onSuccess = {
@@ -132,7 +147,7 @@ fun AdicionarBeneficiarioScreen(navController: NavController) {
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
         ) {
-            Text(if (isSaving) "Salvando..." else "Registar", color = Color.White)
+            Text(if (isSaving) "Salvando..." else "Registrar", color = Color.White)
         }
 
         // Mensagem de erro
@@ -147,6 +162,8 @@ fun handleAdicionarBeneficiario(
     contacto: String,
     nacionalidade: String,
     dimensaoAgregado: Int,
+    notas: String,
+    referencia: String,
     context: Context,
     navController: NavController,
     onSuccess: () -> Unit,
@@ -169,18 +186,20 @@ fun handleAdicionarBeneficiario(
             contacto = contacto,
             dimensaoAgregado = dimensaoAgregado,
             nacionalidade = nacionalidade,
-            nomeRepresentante = nome
+            nomeRepresentante = nome,
+            notas = notas,
+            referencia = referencia
         )
 
         try {
             apiInstance.beneficiariosPost(beneficiario)
             withContext(Dispatchers.Main) { onSuccess() }
         } catch (e: ClientException) {
-            println("4xx response calling VisitasApi#visitasGet")
+            println("4xx response calling BeneficiariosApi#beneficiariosPost")
             withContext(Dispatchers.Main) { onError() }
             e.printStackTrace()
         } catch (e: ServerException) {
-            println("5xx response calling VisitasApi#visitasGet")
+            println("5xx response calling BeneficiariosApi#beneficiariosPost")
             withContext(Dispatchers.Main) { onError() }
             e.printStackTrace()
         }
