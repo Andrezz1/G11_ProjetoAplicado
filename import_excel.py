@@ -1,109 +1,97 @@
 import pandas as pd
-from sqlalchemy import create_engine, text
-from sqlalchemy.exc import SQLAlchemyError
+import psycopg2
+from io import StringIO
+from datetime import datetime
 import os
-#from dotenv import load_dotenv
+import math
 
-#load_dotenv()
-
-# Database credentials from environment variables
-db_host = "localhost"#os.getenv("DB_HOST")
-db_name = "doamais"#os.getenv("DB_NAME")
-db_user = "postgres"#os.getenv("DB_USER")
-db_password = "alexis27"#os.getenv("DB_PASSWORD")
-db_port = os.getenv("DB_PORT", 5432)  # Default PostgreSQL port
-
-# Construct the database connection URL
-db_url = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
-
-
-def import_excel_to_postgres(excel_file_path, db_url):
+def import_visits_from_excel(file_path, db_params):
     """
-    Imports data from an Excel file to a PostgreSQL database.
+    Imports visit data from an Excel file into a PostgreSQL database.
 
     Args:
-        excel_file_path (str): Path to the Excel file.
-        db_url (str): PostgreSQL database connection URL.
+        file_path (str): The path to the Excel file.
+        db_params (dict): A dictionary containing database connection parameters:
+            - host (str): The database host.
+            - database (str): The database name.
+            - user (str): The database user.
+            - password (str): The database password.
+            - port (int, optional): The database port (default is 5432).
     """
+
     try:
-        # Read the Excel file using pandas
-        df = pd.read_excel(excel_file_path)
-        # Rename columns to match the database table structure
-        df = df.rename(
-            columns={
-                "ID": "id",
-                "Nome": "nome_representante",
-                "Telemóvel": "contacto",
-                "Nacionalidade": "nacionalidade",
-                "Família de": "dimensao_agregado",
-                "Referência": "referencia",
-                "Notas": "notas",
-            }
-        )
-        # Drop rows where 'id' column is NaN (empty)
-        df = df.dropna(subset=["id"])
-        # Convert 'id' to integer
-        df["id"] = df["id"].astype(int)
+        # Read the Excel file into a pandas DataFrame
+        df = pd.read_excel(file_path)
 
-        # if dimension is not a number, set to 0
-        df["dimensao_agregado"] = df["dimensao_agregado"].apply(
-            lambda x: 0 if not isinstance(x, int) else x
-        )
+        # Rename the first column 'ID' for consistent handling
+        df = df.rename(columns={df.columns[0]: 'ID'})
 
-        # Handle NaN values in 'dimensao_agregado' by setting to None
-        df["dimensao_agregado"] = df["dimensao_agregado"].fillna(0).astype(int)
+        # Convert dates in header from "m/d/yyyy" format to "yyyy-mm-dd" format
+        date_cols = []
+        for col in df.columns:
+            try:
+                if type(col) == datetime:
+                    new_col_name = col.strftime('%Y-%m-%d')
+                    df.rename(columns={col: new_col_name}, inplace=True)
+                    date_cols.append(new_col_name)
+                    continue
+                #date_obj = datetime.strptime(col, '%m/%d/%Y')
 
-        # Handle NaN values in 'referencia' and 'notas' by setting to an empty string
-        df["referencia"] = df["referencia"].fillna("")
-        df["notas"] = df["notas"].fillna("")
+            except ValueError:
+                # Ignore non-date columns
+                continue
+        
+        # Create a connection to the PostgreSQL database
+        conn = psycopg2.connect(**db_params)
+        cur = conn.cursor()
 
-        # Select only the desired columns
-        df = df[["id", "nome_representante", "contacto", "nacionalidade", "dimensao_agregado", "referencia", "notas"]]
-        # Create a database engine
-        engine = create_engine(db_url)
 
-        # Insert data into the table using a raw SQL insert
-        with engine.begin() as connection:
-          for row in df.to_dict(orient='records'):
-                query = text(
-                """
-                    INSERT INTO doamais.beneficiario (
-                        id, 
-                        nome_representante, 
-                        contacto, 
-                        nacionalidade, 
-                        dimensao_agregado, 
-                        referencia, 
-                        notas
-                    )
-                    VALUES (
-                        :id,
-                        :nome_representante,
-                        :contacto,
-                        :nacionalidade,
-                        :dimensao_agregado,
-                        :referencia,
-                        :notas
-                    )
-                    ON CONFLICT (id) DO UPDATE SET
-                        nome_representante = :nome_representante,
-                        contacto = :contacto,
-                        nacionalidade = :nacionalidade,
-                        dimensao_agregado = :dimensao_agregado,
-                        referencia = :referencia,
-                        notas = :notas;
-                """
-              )
-                connection.execute(query, row)
+        # Iterate through each row in the DataFrame
+        for _, row in df.iterrows():
+            beneficiario_id = row['ID']
+            for col in date_cols:
+                if pd.notna(row[col]) and row[col] == 1: #Check if the visit exists
+                    try:
+                        
+                        date_obj = datetime.strptime(col, '%Y-%m-%d').date()
+                    except ValueError:
+                        print(f"Error parsing date: {col} for beneficiario {beneficiario_id}")
+                        continue
 
-        print("Data successfully imported to PostgreSQL.")
+                    # Insert the visit into the database
+                    query = """
+                                INSERT INTO doamais.visita (beneficiario_id, date)
+                                VALUES (%s, %s)
+                            """
+                    if math.isnan(beneficiario_id):
+                        print(f"beneficiario_id is NaN")
+                        continue
+                    print(f"Inserting beneficiario_id: {int(beneficiario_id)}, date: {date_obj}")
+                    cur.execute(query, (beneficiario_id, date_obj))
+
+        # Commit the changes and close the connection
+        conn.commit()
+        cur.close()
+        conn.close()
+        print("Data import successful!")
+
     except FileNotFoundError:
-        print(f"Error: Excel file not found at {excel_file_path}")
-    except SQLAlchemyError as e:
-       print(f"A database error occurred: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        print(f"Error: File not found at {file_path}")
+    except pd.errors.ParserError as e:
+         print(f"Error parsing Excel: {e}")
+    ##except psycopg2.Error as e:
+    ##    print(f"Database error: {e}")
+    ##except Exception as e:
+    ##     print(f"An unexpected error occured: {e}")
 
 if __name__ == "__main__":
-    excel_file = "excel.xlsx"  # Replace with your file path
-    import_excel_to_postgres(excel_file, db_url)
+    # Database connection parameters
+    db_params = {
+        "host": os.environ.get("POSTGRES_HOST", "localhost"),
+        "database": os.environ.get("POSTGRES_DB", "doamais"),
+        "user": os.environ.get("POSTGRES_USER", "postgres"),
+        "password": os.environ.get("POSTGRES_PASSWORD", "alexis27"),
+        "port": int(os.environ.get("POSTGRES_PORT", 5432)),  # Convert port to integer
+    }
+    file_path = "excel.xlsx"
+    import_visits_from_excel(file_path, db_params)
