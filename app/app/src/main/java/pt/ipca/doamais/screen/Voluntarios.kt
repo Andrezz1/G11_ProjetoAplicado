@@ -32,6 +32,10 @@ fun VoluntariosScreen(navController: NavController) {
             Text("Adicionar Voluntário")
         }
 
+        Button(onClick = { navController.navigate("disponibilidade") }) {
+            Text("Disponibilidade")
+        }
+
         // Botão para voltar à Home
         Button(onClick = { navController.popBackStack() }) {
             Text("Voltar à Home")

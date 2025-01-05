@@ -28,7 +28,10 @@ import pt.ipca.doamais.screen.ListaBeneficiariosScreen
 import pt.ipca.doamais.screen.AdicionarBeneficiarioScreen
 import pt.ipca.doamais.screen.ListaLevantamentosScreen
 import pt.ipca.doamais.screen.AdicionarLevantamentoScreen
-
+import pt.ipca.doamais.screen.ListaVoluntariosScreen
+import pt.ipca.doamais.screen.AdicionarVoluntarioScreen
+import pt.ipca.doamais.screen.CriarTurnosScreen
+import pt.ipca.doamais.screen.DisponibilidadeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,6 +121,21 @@ class MainActivity : ComponentActivity() {
                             AdicionarLevantamentoScreen(navController = navController)
                         }
 
+                        composable("lista_voluntarios") {
+                            ListaVoluntariosScreen(navController = navController)
+                        }
+
+                        composable("adicionar_voluntario") {
+                            AdicionarVoluntarioScreen(navController = navController)
+                        }
+
+                        composable("criar_turnos") {
+                            CriarTurnosScreen(navController = navController)
+                        }
+
+                        composable("disponibilidade") {
+                            DisponibilidadeScreen(navController = navController)
+                        }
 
                     }
                 }
