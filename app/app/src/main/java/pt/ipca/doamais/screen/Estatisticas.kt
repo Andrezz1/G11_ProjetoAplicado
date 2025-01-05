@@ -138,7 +138,7 @@ fun EstatisticasScreen(navController: NavController, viewModel: EstatisticasView
 
         // Título Nacionalidades
         Text(
-            text = "Nacionalidades",
+            text = "Nacionalidades dos beneficiarios",
             textAlign = TextAlign.Center,
             fontSize = 18.sp
             //style = androidx.compose.ui.text.TextStyle(color = Color.Black, fontSize = 18.sp)
@@ -151,7 +151,7 @@ fun EstatisticasScreen(navController: NavController, viewModel: EstatisticasView
             nacionalidades = nacionalidadesList, // Dados dinâmicos
             modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp) // Aumentei a altura para acomodar os valores abaixo das barras
+                //.height(300.dp) // Aumentei a altura para acomodar os valores abaixo das barras
         )
     }
 }
