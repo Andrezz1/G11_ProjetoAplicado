@@ -1,5 +1,7 @@
 package pt.ipca.doamais.screen
 
+import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -23,8 +25,12 @@ import androidx.compose.material3.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
+import org.openapitools.client.infrastructure.ApiClient
+import org.openapitools.client.infrastructure.ClientException
+import org.openapitools.client.infrastructure.ServerException
 import pt.ipca.doamais.ui.theme.AppTheme
 import pt.ipca.doamais.R
+import java.util.Base64
 
 
 @Composable
@@ -36,6 +42,7 @@ fun AdicionarBeneficiarioScreen(navController: NavController) {
     var dimensaoAgregado by remember { mutableStateOf("") }
     var erro by remember { mutableStateOf<String?>(null) }
     var isSaving by remember { mutableStateOf(false) }
+    var context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -106,6 +113,7 @@ fun AdicionarBeneficiarioScreen(navController: NavController) {
                     contacto = contacto,
                     nacionalidade = nacionalidade,
                     dimensaoAgregado = dimensaoAgregado.toIntOrNull() ?: 0,
+                    context = context,
                     navController = navController,
                     onSuccess = {
                         isSaving = false
@@ -129,7 +137,7 @@ fun AdicionarBeneficiarioScreen(navController: NavController) {
 
         // Mensagem de erro
         erro?.let {
-            Text(text = it, color = Color.Red, modifier = Modifier.padding(top = 8.dp))
+            Text(text = it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(top = 8.dp))
         }
     }
 }
@@ -139,11 +147,22 @@ fun handleAdicionarBeneficiario(
     contacto: String,
     nacionalidade: String,
     dimensaoAgregado: Int,
+    context: Context,
     navController: NavController,
     onSuccess: () -> Unit,
     onError: () -> Unit
 ) {
     CoroutineScope(Dispatchers.IO).launch {
+        val (savedUsername, savedPassword) = getCredentials(context)
+        if (savedUsername == null || savedPassword == null) {
+            println("Credenciais não encontradas")
+            navController.navigate("login")
+            return@launch
+        }
+        var apikey = "$savedUsername;$savedPassword"
+        apikey = Base64.getEncoder().encodeToString(apikey.toByteArray())
+        ApiClient.apiKey["Authorization"] = apikey
+
         val apiInstance = BeneficiariosApi("http://188.245.242.57/")
 
         val beneficiario = Beneficiario(
@@ -156,8 +175,14 @@ fun handleAdicionarBeneficiario(
         try {
             apiInstance.beneficiariosPost(beneficiario)
             withContext(Dispatchers.Main) { onSuccess() }
-        } catch (e: Exception) {
+        } catch (e: ClientException) {
+            println("4xx response calling VisitasApi#visitasGet")
             withContext(Dispatchers.Main) { onError() }
+            e.printStackTrace()
+        } catch (e: ServerException) {
+            println("5xx response calling VisitasApi#visitasGet")
+            withContext(Dispatchers.Main) { onError() }
+            e.printStackTrace()
         }
     }
 }
