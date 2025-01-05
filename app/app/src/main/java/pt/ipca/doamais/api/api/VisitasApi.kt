@@ -21,6 +21,8 @@ import okhttp3.HttpUrl
 
 import pt.ipca.doamais.api.model.Visita
 
+import com.squareup.moshi.Json
+
 import org.openapitools.client.infrastructure.ApiClient
 import org.openapitools.client.infrastructure.ApiResponse
 import org.openapitools.client.infrastructure.ClientException
@@ -28,12 +30,14 @@ import org.openapitools.client.infrastructure.ClientError
 import org.openapitools.client.infrastructure.ServerException
 import org.openapitools.client.infrastructure.ServerError
 import org.openapitools.client.infrastructure.MultiValueMap
+import org.openapitools.client.infrastructure.PartConfig
 import org.openapitools.client.infrastructure.RequestConfig
 import org.openapitools.client.infrastructure.RequestMethod
 import org.openapitools.client.infrastructure.ResponseType
 import org.openapitools.client.infrastructure.Success
+import org.openapitools.client.infrastructure.toMultiValue
 
-class VisitasApi(basePath: kotlin.String = defaultBasePath, client: okhttp3.Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+class VisitasApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {

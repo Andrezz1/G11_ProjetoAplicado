@@ -21,6 +21,8 @@ import okhttp3.HttpUrl
 
 import pt.ipca.doamais.api.model.Beneficiario
 
+import com.squareup.moshi.Json
+
 import org.openapitools.client.infrastructure.ApiClient
 import org.openapitools.client.infrastructure.ApiResponse
 import org.openapitools.client.infrastructure.ClientException
@@ -28,10 +30,12 @@ import org.openapitools.client.infrastructure.ClientError
 import org.openapitools.client.infrastructure.ServerException
 import org.openapitools.client.infrastructure.ServerError
 import org.openapitools.client.infrastructure.MultiValueMap
+import org.openapitools.client.infrastructure.PartConfig
 import org.openapitools.client.infrastructure.RequestConfig
 import org.openapitools.client.infrastructure.RequestMethod
 import org.openapitools.client.infrastructure.ResponseType
 import org.openapitools.client.infrastructure.Success
+import org.openapitools.client.infrastructure.toMultiValue
 
 class BeneficiariosApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
     companion object {
@@ -324,20 +328,19 @@ class BeneficiariosApi(basePath: kotlin.String = defaultBasePath, client: Call.F
      * 
      * 
      * @param beneficiario  (optional)
-     * @return kotlin.Any
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun beneficiariosPost(beneficiario: Beneficiario? = null) : kotlin.Any {
+    fun beneficiariosPost(beneficiario: Beneficiario? = null) : Unit {
         val localVarResponse = beneficiariosPostWithHttpInfo(beneficiario = beneficiario)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -355,16 +358,15 @@ class BeneficiariosApi(basePath: kotlin.String = defaultBasePath, client: Call.F
      * 
      * 
      * @param beneficiario  (optional)
-     * @return ApiResponse<kotlin.Any?>
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun beneficiariosPostWithHttpInfo(beneficiario: Beneficiario?) : ApiResponse<kotlin.Any?> {
+    fun beneficiariosPostWithHttpInfo(beneficiario: Beneficiario?) : ApiResponse<Unit?> {
         val localVariableConfig = beneficiariosPostRequestConfig(beneficiario = beneficiario)
 
-        return request<Beneficiario, kotlin.Any>(
+        return request<Beneficiario, Unit>(
             localVariableConfig
         )
     }
@@ -380,8 +382,7 @@ class BeneficiariosApi(basePath: kotlin.String = defaultBasePath, client: Call.F
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/Beneficiarios",
