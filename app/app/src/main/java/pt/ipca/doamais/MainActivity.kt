@@ -24,6 +24,11 @@ import pt.ipca.doamais.screen.CalendarioScreen
 import pt.ipca.doamais.screen.EstatisticasScreen
 import pt.ipca.doamais.screen.LevantamentosScreen
 import pt.ipca.doamais.screen.VoluntariosScreen
+import pt.ipca.doamais.screen.ListaBeneficiariosScreen
+import pt.ipca.doamais.screen.AdicionarBeneficiarioScreen
+import pt.ipca.doamais.screen.ListaLevantamentosScreen
+import pt.ipca.doamais.screen.AdicionarLevantamentoScreen
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,6 +101,24 @@ class MainActivity : ComponentActivity() {
                         composable("adicionar_voluntario") {
                             Text(text = "Adicionar Voluntário", modifier = Modifier.fillMaxWidth())
                         }
+
+                        composable("lista_beneficiarios") {
+                            ListaBeneficiariosScreen(navController = navController)
+                        }
+
+                        composable("adicionar_beneficiario") {
+                            AdicionarBeneficiarioScreen(navController = navController)
+                        }
+
+                        composable("lista_levantamentos") {
+                            ListaLevantamentosScreen(navController = navController)
+                        }
+
+                        composable("adicionar_levantamento") {
+                            AdicionarLevantamentoScreen(navController = navController)
+                        }
+
+
                     }
                 }
             }
