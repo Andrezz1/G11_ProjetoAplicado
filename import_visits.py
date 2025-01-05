@@ -1,9 +1,10 @@
 import pandas as pd
 import psycopg2
-from io import StringIO
 from datetime import datetime
 import os
 import math
+
+
 
 def import_visits_from_excel(file_path, db_params):
     """
