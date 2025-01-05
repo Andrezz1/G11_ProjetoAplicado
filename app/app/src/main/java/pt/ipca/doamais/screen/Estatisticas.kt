@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -128,6 +129,7 @@ fun EstatisticasScreen(navController: NavController, viewModel: EstatisticasView
 
 @Composable
 fun LineGraph(data: List<Float>, modifier: Modifier = Modifier) {
+    val primaryColor = MaterialTheme.colorScheme.primary
     Canvas(modifier = modifier) {
         if (data.isEmpty()) return@Canvas
         val maxData = data.maxOrNull() ?: 0f
@@ -136,7 +138,7 @@ fun LineGraph(data: List<Float>, modifier: Modifier = Modifier) {
 
         for (i in 1 until data.size) {
             drawLine(
-                color = Color.Blue,
+                color = primaryColor,
                 start = androidx.compose.ui.geometry.Offset(
                     (i - 1) * stepX,
                     size.height - data[i - 1] * stepY
@@ -229,20 +231,19 @@ fun getData(context: Context, navController: NavController) {
     apikey = Base64.getEncoder().encodeToString(apikey.toByteArray())
     ApiClient.apiKey["Authorization"] = apikey
     val apiVisitaInstance = VisitasApi()
-    val visitasResult : List<Visita>
-    try {
-        visitasResult = apiVisitaInstance.visitasGet()
-        println(visitasResult)
+    val visitasResult: List<Visita> = try {
+        apiVisitaInstance.visitasGet()
     } catch (e: ClientException) {
         println("4xx response calling VisitasApi#visitasGet")
         e.printStackTrace()
+        emptyList()
     } catch (e: ServerException) {
         println("5xx response calling VisitasApi#visitasGet")
         e.printStackTrace()
+        emptyList()
     }
 
-
-    val benResult : List<Beneficiario>
+    val benResult: List<Beneficiario>
     val apiBeneficiarioInstance = BeneficiariosApi()
     try {
         benResult = apiBeneficiarioInstance.beneficiariosGet()
@@ -262,11 +263,10 @@ fun getData(context: Context, navController: NavController) {
     val dateFormat: DateFormat = SimpleDateFormat("MM", Locale.ENGLISH)
     val date: Date = Date()
 
-    //for (i in 0..5) {
-    //    val month = date.month - i
-    //    val visitsInMonth = visitasResult.filter { dateFormat.format(it.data).toInt() == month }
-    //    visits.add(visitsInMonth.size.toFloat())
-    //    months.add(dateFormat.format(month).toString())
-    //}
-
+    for (i in 0..5) {
+        val month = date.month - i
+        val visitsInMonth = visitasResult.filter { dateFormat.format(it.date).toInt() == month }
+        visits.add(visitsInMonth.size.toFloat())
+        months.add(dateFormat.format(month).toString())
+    }
 }
