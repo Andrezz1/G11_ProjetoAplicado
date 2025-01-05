@@ -27,6 +27,8 @@ import com.squareup.moshi.JsonClass
  * @param id 
  * @param nacionalidade 
  * @param nomeRepresentante 
+ * @param notas 
+ * @param referencia 
  */
 
 
@@ -45,7 +47,13 @@ data class Beneficiario (
     val nacionalidade: kotlin.String? = null,
 
     @Json(name = "nomeRepresentante")
-    val nomeRepresentante: kotlin.String? = null
+    val nomeRepresentante: kotlin.String? = null,
+
+    @Json(name = "notas")
+    val notas: kotlin.String? = null,
+
+    @Json(name = "referencia")
+    val referencia: kotlin.String? = null
 
 ) {
 

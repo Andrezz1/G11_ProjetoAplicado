@@ -53,11 +53,6 @@ def import_excel_to_postgres(excel_file_path, db_url):
         # Handle NaN values in 'dimensao_agregado' by setting to None
         df["dimensao_agregado"] = df["dimensao_agregado"].fillna(0).astype(int)
 
-        # if contacto > 9 digits, set to 0
-        #if len(str(df["contacto"]).strip()) > 9:
-        #    df["contacto"] = "Descon."
-        
-
         # Handle NaN values in 'referencia' and 'notas' by setting to an empty string
         df["referencia"] = df["referencia"].fillna("")
         df["notas"] = df["notas"].fillna("")
