@@ -20,6 +20,10 @@ import pt.ipca.doamais.screen.Login
 import pt.ipca.doamais.ui.theme.DoaTheme
 import pt.ipca.doamais.screen.HomeScreen
 import pt.ipca.doamais.screen.BeneficiariosScreen
+import pt.ipca.doamais.screen.CalendarioScreen
+import pt.ipca.doamais.screen.EstatisticasScreen
+import pt.ipca.doamais.screen.LevantamentosScreen
+import pt.ipca.doamais.screen.VoluntariosScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +66,35 @@ class MainActivity : ComponentActivity() {
                         composable("adicionar_beneficiario") {
                             // Here you would implement the form to add a new beneficiary
                             Text(text = "Adicionar Beneficiário", modifier = Modifier.fillMaxWidth())
+                        }
+
+                        // Define Calendario screen
+                        composable("calendario") {
+                            CalendarioScreen(navController = navController)
+                        }
+
+                        // Define Estatisticas screen
+                        composable("estatisticas") {
+                            EstatisticasScreen(navController = navController)
+                        }
+
+                        // Define Levantamentos screen
+                        composable("levantamentos") {
+                            LevantamentosScreen(navController = navController)
+                        }
+
+                        // Define Voluntarios screen
+                        composable("voluntarios") {
+                            VoluntariosScreen(navController = navController)
+                        }
+
+                        // Add screens for "lista_voluntarios" and "adicionar_voluntario" if needed
+                        composable("lista_voluntarios") {
+                            Text(text = "Lista de Voluntários", modifier = Modifier.fillMaxWidth())
+                        }
+
+                        composable("adicionar_voluntario") {
+                            Text(text = "Adicionar Voluntário", modifier = Modifier.fillMaxWidth())
                         }
                     }
                 }

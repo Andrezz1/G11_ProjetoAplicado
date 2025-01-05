@@ -32,5 +32,9 @@ fun BeneficiariosScreen(navController: NavController) {
         ) {
             Text("Adicionar Beneficiário")
         }
+        // Botão para retornar à HomeScreen
+        Button(onClick = { navController.popBackStack() }) {
+            Text("Voltar à Home")
+        }
     }
 }
