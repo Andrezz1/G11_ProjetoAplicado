@@ -1,14 +1,19 @@
 package pt.ipca.doamais.screen
 
+import android.app.DatePickerDialog
 import android.content.Context
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,8 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.withContext
 import org.openapitools.client.infrastructure.ApiClient
 import org.openapitools.client.infrastructure.ClientException
 import org.openapitools.client.infrastructure.ServerException
@@ -31,37 +38,43 @@ import pt.ipca.doamais.api.api.VisitasApi
 import pt.ipca.doamais.api.model.Beneficiario
 import pt.ipca.doamais.api.model.Visita
 import pt.ipca.doamais.ui.theme.AppTheme
-import java.text.DateFormat
-import java.text.SimpleDateFormat
+import java.time.YearMonth
 import java.util.Base64
-import java.util.Date
-import java.util.Locale
+import java.util.Calendar
 
 // ViewModel para gerenciar os dados da tela
-class EstatisticasViewModel : androidx.lifecycle.ViewModel() {
-    // Simulação de dados da base de dados para visitas
-    private val _visitasData = MutableStateFlow(listOf(300f, 200f, 300f, 250f, 270f, 350f, 400f))
-    val visitasData: StateFlow<List<Float>> = _visitasData
-
-    // Simulação de dados da base de dados para nacionalidades
-    private val _nacionalidadesData = MutableStateFlow(
-        listOf(
-            Nacionalidade("Brasileiro", 100f),
-            Nacionalidade("Português", 80f),
-            Nacionalidade("Cabo-verdiano", 60f),
-            Nacionalidade("Argentino", 40f),
-            Nacionalidade("Ucraniano", 20f)
-        )
-    )
-    val nacionalidadesData: StateFlow<List<Nacionalidade>> = _nacionalidadesData
-}
+//class EstatisticasViewModel : androidx.lifecycle.ViewModel() {
+//    private val _visitasData = MutableStateFlow(listOf<Float>())
+//    val visitasData: StateFlow<List<Float>> = _visitasData
+//
+//    private val _nacionalidadesData = MutableStateFlow(listOf<Nacionalidade>())
+//    val nacionalidadesData: StateFlow<List<Nacionalidade>> = _nacionalidadesData
+//
+//    fun updateData(visitas: Int, nacionalidades: List<Nacionalidade>) {
+//        _visitasData.value = visitas
+//        _nacionalidadesData.value = nacionalidades
+//    }
+//}
 
 data class Nacionalidade(val nome: String, val quantidade: Float)
 
 @Composable
-fun EstatisticasScreen(navController: NavController, viewModel: EstatisticasViewModel = viewModel()) {
-    val visitas by viewModel.visitasData.collectAsState()
-    val nacionalidades by viewModel.nacionalidadesData.collectAsState()
+fun EstatisticasScreen(navController: NavController) {
+    //val visitasList by viewModel.visitasData.collectAsState()
+    //val nacionalidadesList by viewModel.nacionalidadesData.collectAsState() // Renamed to nacionalidadesList
+    val context = LocalContext.current
+    val calendar = Calendar.getInstance()
+    val currentMonth = remember { mutableStateOf(YearMonth.now()) }
+    var nVisitas: Int = 0
+    var nacionalidadesList: List<Nacionalidade> = emptyList()
+    LaunchedEffect(currentMonth.value) {
+        val (visitas, nacionalidades) = getStats(context, navController, currentMonth.value)
+        nVisitas = visitas
+        nacionalidadesList = nacionalidades
+
+    //viewModel.updateData(visitas.map { it.toFloat() }, nacionalidades)
+
+    }
 
     Column(
         modifier = Modifier
@@ -78,32 +91,50 @@ fun EstatisticasScreen(navController: NavController, viewModel: EstatisticasView
                 .padding(bottom = 16.dp)
         )
 
-        // Total de visitas
-        Text("Visitas")
-        Text("3702")
+        // Button to show date picker
+        Button(onClick = {
+            DatePickerDialog(
+                context,
+                { _, year, month, _ ->
+                    currentMonth.value = YearMonth.of(year, month + 1)
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Gráfico de visitas com meses abaixo
-        Column {
-            LineGraph(
-                data = visitas, // Dados dinâmicos
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                val months = listOf("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul") // Substituir com meses reais ou dinâmicos
-                months.forEach {
-                    Text(text = it, textAlign = TextAlign.Center, fontSize = 12.sp)
-                }
-            }
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }) {
+            Text("Seleciona um mês")
         }
+
+        // Display selected month
+        Text("Mês selecionado: ${currentMonth.value}")
+
+        // Total de visitas
+        Text("$nVisitas Visitas")
+
+        //Spacer(modifier = Modifier.height(16.dp))
+//
+        //// Gráfico de visitas com meses abaixo
+        //Column {
+        //    LineGraph(
+        //        data = visitas, // Dados dinâmicos
+        //        modifier = Modifier
+        //            .fillMaxWidth()
+        //            .height(200.dp)
+        //    )
+        //    Row(
+        //        modifier = Modifier
+        //            .fillMaxWidth()
+        //            .padding(top = 8.dp),
+        //        horizontalArrangement = Arrangement.SpaceBetween
+        //    ) {
+        //        val months = listOf("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul") // Substituir com meses reais ou dinâmicos
+        //        months.forEach {
+        //            Text(text = it, textAlign = TextAlign.Center, fontSize = 12.sp)
+        //        }
+        //    }
+        //}
 
         Spacer(modifier = Modifier.height(32.dp))
 
@@ -119,14 +150,13 @@ fun EstatisticasScreen(navController: NavController, viewModel: EstatisticasView
 
         // Gráfico de barras com valores e texto menor
         BarChart(
-            nacionalidades = nacionalidades, // Dados dinâmicos
+            nacionalidades = nacionalidadesList, // Dados dinâmicos
             modifier = Modifier
                 .fillMaxWidth()
                 .height(300.dp) // Aumentei a altura para acomodar os valores abaixo das barras
         )
     }
 }
-
 @Composable
 fun LineGraph(data: List<Float>, modifier: Modifier = Modifier) {
     val primaryColor = MaterialTheme.colorScheme.primary
@@ -210,7 +240,6 @@ fun BarChart(nacionalidades: List<Nacionalidade>, modifier: Modifier = Modifier)
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun EstatisticasScreenPreview() {
@@ -219,54 +248,69 @@ fun EstatisticasScreenPreview() {
     }
 }
 
-fun getData(context: Context, navController: NavController) {
-
+suspend fun getStats(context: Context, navController: NavController, month: YearMonth): Pair<Int, List<Nacionalidade>> {
     val (savedUsername, savedPassword) = getCredentials(context)
     if (savedUsername == null || savedPassword == null) {
         println("Credenciais não encontradas")
-        navController.navigate("login")
-        return
+        withContext(Dispatchers.Main) {
+            navController.navigate("login")
+        }
+        return Pair(0, emptyList())
     }
     var apikey = "$savedUsername;$savedPassword"
     apikey = Base64.getEncoder().encodeToString(apikey.toByteArray())
     ApiClient.apiKey["Authorization"] = apikey
-    val apiVisitaInstance = VisitasApi()
-    val visitasResult: List<Visita> = try {
-        apiVisitaInstance.visitasGet()
-    } catch (e: ClientException) {
-        println("4xx response calling VisitasApi#visitasGet")
-        e.printStackTrace()
-        emptyList()
-    } catch (e: ServerException) {
-        println("5xx response calling VisitasApi#visitasGet")
-        e.printStackTrace()
-        emptyList()
+
+    val visitasResult: List<Visita> = withContext(Dispatchers.IO) {
+        val apiVisitaInstance = VisitasApi("http://188.245.242.57/")
+        try {
+            apiVisitaInstance.visitasGet()
+        } catch (e: ClientException) {
+            println("4xx response calling VisitasApi#visitasGet")
+            e.printStackTrace()
+            emptyList()
+        } catch (e: ServerException) {
+            println("5xx response calling VisitasApi#visitasGet")
+            e.printStackTrace()
+            emptyList()
+        }
     }
 
-    val benResult: List<Beneficiario>
-    val apiBeneficiarioInstance = BeneficiariosApi()
-    try {
-        benResult = apiBeneficiarioInstance.beneficiariosGet()
-        println(benResult)
-    } catch (e: ClientException) {
-        println("4xx response calling BeneficiariosApi#beneficiariosGet")
-        e.printStackTrace()
-    } catch (e: ServerException) {
-        println("5xx response calling BeneficiariosApi#beneficiariosGet")
-        e.printStackTrace()
+    val benResult: List<Beneficiario> = withContext(Dispatchers.IO) {
+        val apiBeneficiarioInstance = BeneficiariosApi("http://188.245.242.57/")
+        try {
+            apiBeneficiarioInstance.beneficiariosGet()
+        } catch (e: ClientException) {
+            println("4xx response calling BeneficiariosApi#beneficiariosGet")
+            e.printStackTrace()
+            emptyList()
+        } catch (e: ServerException) {
+            println("5xx response calling BeneficiariosApi#beneficiariosGet")
+            e.printStackTrace()
+            emptyList()
+        }
     }
 
-    // Count the number of visits in the last 6 months
-    // Read the visitas and ignore the ones that are not in the last 6 months
-    val visits = mutableListOf<Float>()
-    val months = mutableListOf<String>()
-    val dateFormat: DateFormat = SimpleDateFormat("MM", Locale.ENGLISH)
-    val date: Date = Date()
-
-    for (i in 0..5) {
-        val month = date.month - i
-        val visitsInMonth = visitasResult.filter { dateFormat.format(it.date).toInt() == month }
-        visits.add(visitsInMonth.size.toFloat())
-        months.add(dateFormat.format(month).toString())
+    // Filter all the visitas from a specific month
+    val visitasMonth = visitasResult.filter {
+        val visitaDate = it.date
+        val visitaYearMonth = visitaDate?.let { it1 -> YearMonth.of(it1.year, visitaDate.monthValue) }
+        visitaYearMonth == month
     }
+
+    // Get all beneficiarios from the visitas
+    val beneficiarios = benResult.filter { beneficiario ->
+        visitasMonth.any { it.beneficiarioId == beneficiario.id }
+    }
+
+    // Get the total number of visits
+    val totalVisits = visitasMonth.size
+
+    // Get all the nationalities from the beneficiarios
+    val nacionalidades = beneficiarios.groupBy { it.nacionalidade }
+        .mapNotNull { (nacionalidade, beneficiarios) ->
+            nacionalidade?.let { Nacionalidade(it, beneficiarios.size.toFloat()) }
+        }
+
+    return Pair(totalVisits, nacionalidades)
 }
