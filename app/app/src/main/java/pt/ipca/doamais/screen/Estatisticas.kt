@@ -2,6 +2,7 @@ package pt.ipca.doamais.screen
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -42,38 +43,35 @@ import java.time.YearMonth
 import java.util.Base64
 import java.util.Calendar
 
-// ViewModel para gerenciar os dados da tela
-//class EstatisticasViewModel : androidx.lifecycle.ViewModel() {
-//    private val _visitasData = MutableStateFlow(listOf<Float>())
-//    val visitasData: StateFlow<List<Float>> = _visitasData
-//
-//    private val _nacionalidadesData = MutableStateFlow(listOf<Nacionalidade>())
-//    val nacionalidadesData: StateFlow<List<Nacionalidade>> = _nacionalidadesData
-//
-//    fun updateData(visitas: Int, nacionalidades: List<Nacionalidade>) {
-//        _visitasData.value = visitas
-//        _nacionalidadesData.value = nacionalidades
-//    }
-//}
+import androidx.lifecycle.ViewModel
+
+class EstatisticasViewModel : ViewModel() {
+    private val _visitasData = MutableStateFlow(0) // Initial value should be an Int, example 0
+    val visitasData: StateFlow<Int> = _visitasData // Corrected type
+
+    private val _nacionalidadesData = MutableStateFlow(listOf<Nacionalidade>())
+    val nacionalidadesData: StateFlow<List<Nacionalidade>> = _nacionalidadesData
+
+    fun updateData(visitas: Int, nacionalidades: List<Nacionalidade>) { // Corrected type
+        _visitasData.value = visitas
+        _nacionalidadesData.value = nacionalidades
+    }
+}
 
 data class Nacionalidade(val nome: String, val quantidade: Float)
 
 @Composable
-fun EstatisticasScreen(navController: NavController) {
-    //val visitasList by viewModel.visitasData.collectAsState()
-    //val nacionalidadesList by viewModel.nacionalidadesData.collectAsState() // Renamed to nacionalidadesList
+fun EstatisticasScreen(navController: NavController, viewModel: EstatisticasViewModel = viewModel()) {
+    val nVisitas by viewModel.visitasData.collectAsState()
+    val nacionalidadesList by viewModel.nacionalidadesData.collectAsState()
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
     val currentMonth = remember { mutableStateOf(YearMonth.now()) }
-    var nVisitas: Int = 0
-    var nacionalidadesList: List<Nacionalidade> = emptyList()
+
     LaunchedEffect(currentMonth.value) {
         val (visitas, nacionalidades) = getStats(context, navController, currentMonth.value)
-        nVisitas = visitas
-        nacionalidadesList = nacionalidades
-
-    //viewModel.updateData(visitas.map { it.toFloat() }, nacionalidades)
-
+        Log.i("EstatisticasScreen", "Visitas: $visitas, Nacionalidades: $nacionalidades")
+        viewModel.updateData(visitas, nacionalidades)
     }
 
     Column(
@@ -185,6 +183,8 @@ fun LineGraph(data: List<Float>, modifier: Modifier = Modifier) {
 
 @Composable
 fun BarChart(nacionalidades: List<Nacionalidade>, modifier: Modifier = Modifier) {
+    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
+    val onPrimaryContainer = MaterialTheme.colorScheme.onPrimaryContainer
     if (nacionalidades.isEmpty()) return
 
     val maxData = nacionalidades.maxOfOrNull { it.quantidade } ?: 1f
@@ -217,7 +217,7 @@ fun BarChart(nacionalidades: List<Nacionalidade>, modifier: Modifier = Modifier)
                             .matchParentSize()
                     ) {
                         drawRect(
-                            color = Color.Blue,
+                            color = primaryContainer,
                             size = androidx.compose.ui.geometry.Size(
                                 width = size.width * (nacionalidade.quantidade / maxData),
                                 height = size.height
@@ -228,7 +228,7 @@ fun BarChart(nacionalidades: List<Nacionalidade>, modifier: Modifier = Modifier)
                     // Valor dentro da barra
                     Text(
                         text = nacionalidade.quantidade.toInt().toString(),
-                        color = Color.White, // Cor do texto para contraste
+                        color = onPrimaryContainer, // Cor do texto para contraste
                         fontSize = 12.sp,
                         modifier = Modifier
                             .align(Alignment.CenterStart)
