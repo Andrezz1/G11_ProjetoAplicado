@@ -13,9 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import pt.ipca.doamais.screen.Login
 import pt.ipca.doamais.screen.HomeScreen
 import pt.ipca.doamais.screen.BeneficiariosScreen
@@ -31,6 +33,7 @@ import pt.ipca.doamais.screen.ListaVoluntariosScreen
 import pt.ipca.doamais.screen.AdicionarVoluntarioScreen
 import pt.ipca.doamais.screen.CriarTurnosScreen
 import pt.ipca.doamais.screen.DisponibilidadeScreen
+import pt.ipca.doamais.screen.EditBeneficiarioScreen
 import pt.ipca.doamais.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -135,6 +138,14 @@ class MainActivity : ComponentActivity() {
 
                         composable("disponibilidade") {
                             DisponibilidadeScreen(navController = navController)
+                        }
+
+                        composable(
+                            route = "editar_beneficiario_screen/{id}",
+                            arguments = listOf(navArgument("id") { type = NavType.IntType })
+                        ) { backStackEntry ->
+                            val id = backStackEntry.arguments?.getInt("id") ?: 0
+                            EditBeneficiarioScreen(navController, id)
                         }
 
                     }

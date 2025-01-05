@@ -166,7 +166,7 @@ fun PesquisaPorId(navController: NavController) {
             IconButton(
                 onClick = {
                     val id = searchId.toIntOrNull()
-                    if (id != null && beneficiario != null) {
+                    if (id != null && id > 0) { // Verifique se o ID é válido e positivo
                         navController.navigate("editar_beneficiario_screen/$id")
                     } else {
                         errorMessage = "ID inválido ou beneficiário não encontrado"
