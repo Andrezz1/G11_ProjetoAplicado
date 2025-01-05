@@ -103,7 +103,7 @@ fun ListaLevantamentosScreen(navController: NavController) {
         // Botões de buscar e remover
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             IconButton(
                 onClick = {
@@ -126,7 +126,6 @@ fun ListaLevantamentosScreen(navController: NavController) {
                 )
             }
 
-            // Botão de remover por ID
             IconButton(
                 onClick = {
                     val id = searchId.toIntOrNull()
@@ -152,6 +151,7 @@ fun ListaLevantamentosScreen(navController: NavController) {
                     contentDescription = "Remover"
                 )
             }
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -179,70 +179,6 @@ fun ListaLevantamentosScreen(navController: NavController) {
         }
     }
 }
-
-fun fetchLevantamentoById(
-    context: Context,
-    id: Int,
-    onSuccess: (Levantamento) -> Unit,
-    onError: () -> Unit
-) {
-    CoroutineScope(Dispatchers.IO).launch {
-        val (savedUsername, savedPassword) = getCredentials(context)
-        if (savedUsername == null || savedPassword == null) {
-            println("Credenciais não encontradas")
-            onError()
-            return@launch
-        }
-
-        var apikey = "$savedUsername;$savedPassword"
-        apikey = Base64.getEncoder().encodeToString(apikey.toByteArray())
-        ApiClient.apiKey["Authorization"] = apikey
-
-        val apiInstance = LevantamentosApi("http://188.245.242.57/")
-
-        try {
-            val result = apiInstance.levantamentosIdGet(id) // Certifique-se que esse método retorna um Levantamento
-            withContext(Dispatchers.Main) { onSuccess(result) }
-        } catch (e: Exception) {
-            println("Erro ao buscar levantamento por ID")
-            withContext(Dispatchers.Main) { onError() }
-            e.printStackTrace()
-        }
-    }
-}
-
-
-fun deleteLevantamentoById(
-    context: Context,
-    id: Int,
-    onSuccess: () -> Unit,
-    onError: () -> Unit
-) {
-    CoroutineScope(Dispatchers.IO).launch {
-        val (savedUsername, savedPassword) = getCredentials(context)
-        if (savedUsername == null || savedPassword == null) {
-            println("Credenciais não encontradas")
-            onError()
-            return@launch
-        }
-
-        var apikey = "$savedUsername;$savedPassword"
-        apikey = Base64.getEncoder().encodeToString(apikey.toByteArray())
-        ApiClient.apiKey["Authorization"] = apikey
-
-        val apiInstance = LevantamentosApi("http://188.245.242.57/")
-
-        try {
-            apiInstance.levantamentosIdDelete(id)
-            withContext(Dispatchers.Main) { onSuccess() }
-        } catch (e: Exception) {
-            println("Erro ao remover levantamento por ID")
-            withContext(Dispatchers.Main) { onError() }
-            e.printStackTrace()
-        }
-    }
-}
-
 
 @Composable
 fun LevantamentoItem(levantamento: Levantamento) {
@@ -290,6 +226,77 @@ fun fetchLevantamentos(
         }
     }
 }
+
+fun fetchLevantamentoById(
+    context: Context,
+    id: Int,
+    onSuccess: (Levantamento) -> Unit,
+    onError: () -> Unit
+) {
+    CoroutineScope(Dispatchers.IO).launch {
+        val (savedUsername, savedPassword) = getCredentials(context)
+        if (savedUsername == null || savedPassword == null) {
+            println("Credenciais não encontradas")
+            onError()
+            return@launch
+        }
+
+        var apikey = "$savedUsername;$savedPassword"
+        apikey = Base64.getEncoder().encodeToString(apikey.toByteArray())
+        ApiClient.apiKey["Authorization"] = apikey
+
+        val apiInstance = LevantamentosApi("http://188.245.242.57/")
+
+        try {
+            val result = apiInstance.levantamentosIdGet(id)
+            withContext(Dispatchers.Main) { onSuccess(result) }
+        } catch (e: ClientException) {
+            println("Erro de cliente ao chamar a API de levantamentos por ID")
+            withContext(Dispatchers.Main) { onError() }
+            e.printStackTrace()
+        } catch (e: ServerException) {
+            println("Erro de servidor ao chamar a API de levantamentos por ID")
+            withContext(Dispatchers.Main) { onError() }
+            e.printStackTrace()
+        }
+    }
+}
+
+fun deleteLevantamentoById(
+    context: Context,
+    id: Int,
+    onSuccess: () -> Unit,
+    onError: () -> Unit
+) {
+    CoroutineScope(Dispatchers.IO).launch {
+        val (savedUsername, savedPassword) = getCredentials(context)
+        if (savedUsername == null || savedPassword == null) {
+            println("Credenciais não encontradas")
+            onError()
+            return@launch
+        }
+
+        var apikey = "$savedUsername;$savedPassword"
+        apikey = Base64.getEncoder().encodeToString(apikey.toByteArray())
+        ApiClient.apiKey["Authorization"] = apikey
+
+        val apiInstance = LevantamentosApi("http://188.245.242.57/")
+
+        try {
+            apiInstance.levantamentosIdDelete(id)
+            withContext(Dispatchers.Main) { onSuccess() }
+        } catch (e: ClientException) {
+            println("Erro de cliente ao chamar a API para remover levantamento")
+            withContext(Dispatchers.Main) { onError() }
+            e.printStackTrace()
+        } catch (e: ServerException) {
+            println("Erro de servidor ao chamar a API para remover levantamento")
+            withContext(Dispatchers.Main) { onError() }
+            e.printStackTrace()
+        }
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
