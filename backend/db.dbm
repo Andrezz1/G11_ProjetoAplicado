@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.1.4" use-changelog="false" max-obj-count="6"
+	 last-position="359,209" last-zoom="0.85" scene-rect="0,0,1793.47,1076.8"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<database name="doamais" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<schema name="doamais" layers="0" rect-visible="true" fill-color="#a2889b" name-color="#ffffff">
+	<role name="postgres"/>
+</schema>
+
+<table name="beneficiario" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="doamais"/>
+	<role name="postgres"/>
+	<position x="520" y="360"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome_representante" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="contacto" not-null="true">
+		<type name="varchar" length="9"/>
+	</column>
+	<column name="nacionalidade" not-null="true" default-value="'Português'">
+		<type name="text" length="0"/>
+	</column>
+	<column name="dimensao_agregado" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="pk_beneficiario" type="pk-constr" table="doamais.beneficiario">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="levantamento" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="doamais"/>
+	<role name="postgres"/>
+	<position x="1400" y="340"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="beneficiario_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="tipo_bens" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="data_levantamento" not-null="true">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="created_by" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="pk_levantamento" type="pk-constr" table="doamais.levantamento">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="users" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="doamais"/>
+	<role name="postgres"/>
+	<position x="1440" y="660"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="role" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="created_on" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<constraint name="pk_users" type="pk-constr" table="doamais.users">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_users_username" type="uq-constr" table="doamais.users">
+		<columns names="username" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="turno" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="doamais"/>
+	<role name="postgres"/>
+	<position x="1000" y="680"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="time" not-null="true">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="tarefas" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="pk_turno" type="pk-constr" table="doamais.turno">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="visita" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="doamais"/>
+	<role name="postgres"/>
+	<position x="520" y="700"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="beneficiario_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="pk_visita" type="pk-constr" table="doamais.visita">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="fk_levantamento_beneficiario" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="doamais.beneficiario" table="doamais.levantamento">
+	<columns names="beneficiario_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_levantamento_users" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="doamais.users" table="doamais.levantamento">
+	<columns names="created_by" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_turno_users" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="doamais.users" table="doamais.turno">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_visita_beneficiario" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="doamais.beneficiario" table="doamais.visita">
+	<columns names="beneficiario_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_levantamento_beneficiario" type="relfk" layers="0"
+	 custom-color="#b66f63"
+	 src-table="doamais.levantamento"
+	 dst-table="doamais.beneficiario" reference-fk="fk_levantamento_beneficiario"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_levantamento_users" type="relfk" layers="0"
+	 custom-color="#75b39f"
+	 src-table="doamais.levantamento"
+	 dst-table="doamais.users" reference-fk="fk_levantamento_users"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_turno_users" type="relfk" layers="0"
+	 custom-color="#c3be08"
+	 src-table="doamais.turno"
+	 dst-table="doamais.users" reference-fk="fk_turno_users"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_visita_beneficiario" type="relfk" layers="0"
+	 custom-color="#26b125"
+	 src-table="doamais.visita"
+	 dst-table="doamais.beneficiario" reference-fk="fk_visita_beneficiario"
+	 src-required="false" dst-required="true"/>
+
+</dbmodel>

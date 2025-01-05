@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="64d808a8-ccd5-4c23-86c2-c9b9e24991dd" activeEnvironment="Default" name="Service" resourceRoot="" soapui-version="5.8.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="83db44d7-8cac-46b6-90af-f3ed98f4ca32" wsaVersion="NONE" name="BasicHttpBinding_IDoaMaisTerraService" type="wsdl" bindingName="{http://tempuri.org/}BasicHttpBinding_IDoaMaisTerraService" soapVersion="1_1" anonymous="optional" definition="https://localhost:7264/Service.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://localhost:7264/Service.wsdl"><con:part><con:url>https://localhost:7264/Service.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://tempuri.org/" name="IDoaMaisTerraService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://tempuri.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Terra"/>
+      <xs:element name="GetBeneficiarioById">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="id" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetBeneficiarioByIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="GetBeneficiarioByIdResult" nillable="true" type="q1:Beneficiario" xmlns:q1="http://schemas.datacontract.org/2004/07/Terra"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllBeneficiarios">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllBeneficiariosResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="GetAllBeneficiariosResult" nillable="true" type="q2:ArrayOfBeneficiario" xmlns:q2="http://schemas.datacontract.org/2004/07/Terra"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddBeneficiario">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="beneficiario" nillable="true" type="q3:Beneficiario" xmlns:q3="http://schemas.datacontract.org/2004/07/Terra"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddBeneficiarioResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateBeneficiario">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="beneficiario" nillable="true" type="q4:Beneficiario" xmlns:q4="http://schemas.datacontract.org/2004/07/Terra"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateBeneficiarioResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteBeneficiario">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="id" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteBeneficiarioResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetTurnoById">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="id" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetTurnoByIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="GetTurnoByIdResult" nillable="true" type="q5:Turno" xmlns:q5="http://schemas.datacontract.org/2004/07/Terra"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllTurnos">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="user_id" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAllTurnosResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="GetAllTurnosResult" nillable="true" type="q6:ArrayOfTurno" xmlns:q6="http://schemas.datacontract.org/2004/07/Terra"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddTurno">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="turno" nillable="true" type="q7:Turno" xmlns:q7="http://schemas.datacontract.org/2004/07/Terra"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddTurnoResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateTurno">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="turno" nillable="true" type="q8:Turno" xmlns:q8="http://schemas.datacontract.org/2004/07/Terra"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateTurnoResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteTurno">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="id" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteTurnoResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+      <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+      <xs:element name="byte" nillable="true" type="xs:byte"/>
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+      <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+      <xs:element name="double" nillable="true" type="xs:double"/>
+      <xs:element name="float" nillable="true" type="xs:float"/>
+      <xs:element name="int" nillable="true" type="xs:int"/>
+      <xs:element name="long" nillable="true" type="xs:long"/>
+      <xs:element name="QName" nillable="true" type="xs:QName"/>
+      <xs:element name="short" nillable="true" type="xs:short"/>
+      <xs:element name="string" nillable="true" type="xs:string"/>
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+      <xs:element name="char" nillable="true" type="tns:char"/>
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration"/>
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid"/>
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName"/>
+      <xs:attribute name="Id" type="xs:ID"/>
+      <xs:attribute name="Ref" type="xs:IDREF"/>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Terra" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/Terra" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/System"/>
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xs:complexType name="Beneficiario">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Contacto" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DimensaoAgregado" type="xs:int"/>
+          <xs:element minOccurs="0" name="Id" type="xs:int"/>
+          <xs:element minOccurs="0" name="Nacionalidade" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="NomeRepresentante" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Beneficiario" nillable="true" type="tns:Beneficiario"/>
+      <xs:complexType name="Turno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Id" type="xs:int"/>
+          <xs:element minOccurs="0" name="Tarefas" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Time" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="UserId" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Turno" nillable="true" type="tns:Turno"/>
+      <xs:complexType name="ArrayOfBeneficiario">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Beneficiario" nillable="true" type="tns:Beneficiario"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfBeneficiario" nillable="true" type="tns:ArrayOfBeneficiario"/>
+      <xs:complexType name="ArrayOfTurno">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Turno" nillable="true" type="tns:Turno"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfTurno" nillable="true" type="tns:ArrayOfTurno"/>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IDoaMaisTerraService_GetBeneficiarioById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBeneficiarioById"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_GetBeneficiarioById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBeneficiarioByIdResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_GetAllBeneficiarios_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBeneficiarios"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_GetAllBeneficiarios_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBeneficiariosResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_AddBeneficiario_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddBeneficiario"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_AddBeneficiario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddBeneficiarioResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_UpdateBeneficiario_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBeneficiario"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_UpdateBeneficiario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBeneficiarioResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_DeleteBeneficiario_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBeneficiario"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_DeleteBeneficiario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBeneficiarioResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_GetTurnoById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTurnoById"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_GetTurnoById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTurnoByIdResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_GetAllTurnos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTurnos"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_GetAllTurnos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTurnosResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_AddTurno_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTurno"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_AddTurno_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTurnoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_UpdateTurno_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTurno"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_UpdateTurno_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTurnoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_DeleteTurno_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTurno"/>
+  </wsdl:message>
+  <wsdl:message name="IDoaMaisTerraService_DeleteTurno_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTurnoResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="IDoaMaisTerraService">
+    <wsdl:operation name="GetBeneficiarioById">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/GetBeneficiarioById" message="tns:IDoaMaisTerraService_GetBeneficiarioById_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/GetBeneficiarioByIdResponse" message="tns:IDoaMaisTerraService_GetBeneficiarioById_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBeneficiarios">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/GetAllBeneficiarios" message="tns:IDoaMaisTerraService_GetAllBeneficiarios_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/GetAllBeneficiariosResponse" message="tns:IDoaMaisTerraService_GetAllBeneficiarios_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="AddBeneficiario">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/AddBeneficiario" message="tns:IDoaMaisTerraService_AddBeneficiario_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/AddBeneficiarioResponse" message="tns:IDoaMaisTerraService_AddBeneficiario_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBeneficiario">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/UpdateBeneficiario" message="tns:IDoaMaisTerraService_UpdateBeneficiario_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/UpdateBeneficiarioResponse" message="tns:IDoaMaisTerraService_UpdateBeneficiario_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBeneficiario">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/DeleteBeneficiario" message="tns:IDoaMaisTerraService_DeleteBeneficiario_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/DeleteBeneficiarioResponse" message="tns:IDoaMaisTerraService_DeleteBeneficiario_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetTurnoById">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/GetTurnoById" message="tns:IDoaMaisTerraService_GetTurnoById_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/GetTurnoByIdResponse" message="tns:IDoaMaisTerraService_GetTurnoById_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTurnos">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/GetAllTurnos" message="tns:IDoaMaisTerraService_GetAllTurnos_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/GetAllTurnosResponse" message="tns:IDoaMaisTerraService_GetAllTurnos_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="AddTurno">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/AddTurno" message="tns:IDoaMaisTerraService_AddTurno_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/AddTurnoResponse" message="tns:IDoaMaisTerraService_AddTurno_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTurno">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/UpdateTurno" message="tns:IDoaMaisTerraService_UpdateTurno_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/UpdateTurnoResponse" message="tns:IDoaMaisTerraService_UpdateTurno_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTurno">
+      <wsdl:input wsam:Action="http://tempuri.org/IDoaMaisTerraService/DeleteTurno" message="tns:IDoaMaisTerraService_DeleteTurno_InputMessage"/>
+      <wsdl:output wsam:Action="http://tempuri.org/IDoaMaisTerraService/DeleteTurnoResponse" message="tns:IDoaMaisTerraService_DeleteTurno_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDoaMaisTerraService" type="tns:IDoaMaisTerraService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetBeneficiarioById">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/GetBeneficiarioById" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBeneficiarios">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/GetAllBeneficiarios" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBeneficiario">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/AddBeneficiario" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBeneficiario">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/UpdateBeneficiario" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBeneficiario">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/DeleteBeneficiario" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTurnoById">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/GetTurnoById" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTurnos">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/GetAllTurnos" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTurno">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/AddTurno" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTurno">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/UpdateTurno" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTurno">
+      <soap:operation soapAction="http://tempuri.org/IDoaMaisTerraService/DeleteTurno" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IDoaMaisTerraService">
+    <wsdl:port name="BasicHttpBinding_IDoaMaisTerraService" binding="tns:BasicHttpBinding_IDoaMaisTerraService">
+      <soap:address location="https://localhost:7264/Service.wsdl"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint></con:endpoints><con:operation id="7516afd1-9e64-4830-9983-224ebab8748e" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/AddBeneficiario" name="AddBeneficiario" bindingOperationName="AddBeneficiario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="da2aa6af-10e7-4f12-88c7-926d6bda2382" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/" xmlns:ter="http://schemas.datacontract.org/2004/07/Terra">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:AddBeneficiario>\r
+         <tem:beneficiario>\r
+            <!--Optional:-->\r
+            <ter:Contacto>?</ter:Contacto>\r
+            <!--Optional:-->\r
+            <ter:DimensaoAgregado>?</ter:DimensaoAgregado>\r
+            <!--Optional:-->\r
+            <ter:Id>?</ter:Id>\r
+            <!--Optional:-->\r
+            <ter:Nacionalidade>?</ter:Nacionalidade>\r
+            <!--Optional:-->\r
+            <ter:NomeRepresentante>?</ter:NomeRepresentante>\r
+         </tem:beneficiario>\r
+      </tem:AddBeneficiario>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/AddBeneficiario"/></con:call></con:operation><con:operation id="f0322535-a6c2-4c55-bb8f-6ca1120c4543" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/AddTurno" name="AddTurno" bindingOperationName="AddTurno" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1655dba8-d35b-44c7-86de-2a78fabd7000" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/" xmlns:ter="http://schemas.datacontract.org/2004/07/Terra">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:AddTurno>\r
+         <tem:turno>\r
+            <!--Optional:-->\r
+            <ter:Id>?</ter:Id>\r
+            <!--Optional:-->\r
+            <ter:Tarefas>?</ter:Tarefas>\r
+            <!--Optional:-->\r
+            <ter:Time>?</ter:Time>\r
+            <!--Optional:-->\r
+            <ter:UserId>?</ter:UserId>\r
+         </tem:turno>\r
+      </tem:AddTurno>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/AddTurno"/></con:call></con:operation><con:operation id="3daacef3-ea2b-4f3d-bc3d-c884112f3089" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/DeleteBeneficiario" name="DeleteBeneficiario" bindingOperationName="DeleteBeneficiario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bce368a0-e557-41ff-87eb-ee40ddd6dbf2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:DeleteBeneficiario>\r
+         <tem:id>?</tem:id>\r
+      </tem:DeleteBeneficiario>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/DeleteBeneficiario"/></con:call></con:operation><con:operation id="536e6ed9-3345-4f78-a905-43975f528fed" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/DeleteTurno" name="DeleteTurno" bindingOperationName="DeleteTurno" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fc90255d-7159-42e8-9c68-d46f6e578b50" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:DeleteTurno>\r
+         <tem:id>?</tem:id>\r
+      </tem:DeleteTurno>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/DeleteTurno"/></con:call></con:operation><con:operation id="0ecd38a5-4f31-4db7-8a57-df7d3b7c18b1" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/GetAllBeneficiarios" name="GetAllBeneficiarios" bindingOperationName="GetAllBeneficiarios" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="49d9c9d7-e36f-4501-96bf-8a6c037c83a2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:GetAllBeneficiarios/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/GetAllBeneficiarios"/></con:call></con:operation><con:operation id="e97fa9ec-75db-457e-ba86-11903211caad" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/GetAllTurnos" name="GetAllTurnos" bindingOperationName="GetAllTurnos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c694fe87-5aa3-4326-9fd9-5c25e1f8a02e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:GetAllTurnos>\r
+         <!--Optional:-->\r
+         <tem:user_id>1</tem:user_id>\r
+      </tem:GetAllTurnos>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/GetAllTurnos"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9e7fe24d-d0e3-4d7a-b660-77d586adc646" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/GetBeneficiarioById" name="GetBeneficiarioById" bindingOperationName="GetBeneficiarioById" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0c1c282a-b489-45cb-a0b3-1edc155b86d3" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:GetBeneficiarioById>\r
+         <tem:id>?</tem:id>\r
+      </tem:GetBeneficiarioById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/GetBeneficiarioById"/></con:call></con:operation><con:operation id="d2a57028-daae-4e20-8782-0cbd35422cdb" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/GetTurnoById" name="GetTurnoById" bindingOperationName="GetTurnoById" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="95b8d243-6d93-4c21-bf73-0022e8a262fe" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:GetTurnoById>\r
+         <tem:id>?</tem:id>\r
+      </tem:GetTurnoById>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/GetTurnoById"/></con:call></con:operation><con:operation id="6346f5d3-50db-493a-943d-bf4899b78480" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/UpdateBeneficiario" name="UpdateBeneficiario" bindingOperationName="UpdateBeneficiario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5ec02108-dd35-4d7f-aa3e-c5be34e59567" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/" xmlns:ter="http://schemas.datacontract.org/2004/07/Terra">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:UpdateBeneficiario>\r
+         <tem:beneficiario>\r
+            <!--Optional:-->\r
+            <ter:Contacto>?</ter:Contacto>\r
+            <!--Optional:-->\r
+            <ter:DimensaoAgregado>?</ter:DimensaoAgregado>\r
+            <!--Optional:-->\r
+            <ter:Id>?</ter:Id>\r
+            <!--Optional:-->\r
+            <ter:Nacionalidade>?</ter:Nacionalidade>\r
+            <!--Optional:-->\r
+            <ter:NomeRepresentante>?</ter:NomeRepresentante>\r
+         </tem:beneficiario>\r
+      </tem:UpdateBeneficiario>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/UpdateBeneficiario"/></con:call></con:operation><con:operation id="50c355a3-e0e9-4e5d-82eb-3af4f1d4da92" isOneWay="false" action="http://tempuri.org/IDoaMaisTerraService/UpdateTurno" name="UpdateTurno" bindingOperationName="UpdateTurno" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9bbdc39a-ff05-477b-bd33-baf45079abf4" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:7264/Service.wsdl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/" xmlns:ter="http://schemas.datacontract.org/2004/07/Terra">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:UpdateTurno>\r
+         <tem:turno>\r
+            <!--Optional:-->\r
+            <ter:Id>?</ter:Id>\r
+            <!--Optional:-->\r
+            <ter:Tarefas>?</ter:Tarefas>\r
+            <!--Optional:-->\r
+            <ter:Time>?</ter:Time>\r
+            <!--Optional:-->\r
+            <ter:UserId>?</ter:UserId>\r
+         </tem:turno>\r
+      </tem:UpdateTurno>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/IDoaMaisTerraService/UpdateTurno"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
