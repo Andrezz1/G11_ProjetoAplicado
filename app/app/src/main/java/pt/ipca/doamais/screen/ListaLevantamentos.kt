@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import pt.ipca.doamais.ui.theme.DoaTheme
+import pt.ipca.doamais.ui.theme.AppTheme
 
 // Modelo fictício para um levantamento
 data class Levantamento(
@@ -82,7 +82,7 @@ fun LevantamentoCard(levantamento: Levantamento) {
 @Preview(showBackground = true)
 @Composable
 fun ListaLevantamentosScreenPreview() {
-    DoaTheme {
+    AppTheme {
         ListaLevantamentosScreen(navController = NavController(context = LocalContext.current))
     }
 }

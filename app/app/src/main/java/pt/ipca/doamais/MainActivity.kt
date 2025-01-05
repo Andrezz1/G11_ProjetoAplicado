@@ -17,7 +17,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import pt.ipca.doamais.screen.Login
-import pt.ipca.doamais.ui.theme.DoaTheme
 import pt.ipca.doamais.screen.HomeScreen
 import pt.ipca.doamais.screen.BeneficiariosScreen
 import pt.ipca.doamais.screen.CalendarioScreen
@@ -32,6 +31,7 @@ import pt.ipca.doamais.screen.ListaVoluntariosScreen
 import pt.ipca.doamais.screen.AdicionarVoluntarioScreen
 import pt.ipca.doamais.screen.CriarTurnosScreen
 import pt.ipca.doamais.screen.DisponibilidadeScreen
+import pt.ipca.doamais.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge() // Optional: For immersive fullscreen
 
         setContent {
-            DoaTheme {
+            AppTheme {
                 // Create the NavController to manage screen navigation
                 val navController = rememberNavController()
 

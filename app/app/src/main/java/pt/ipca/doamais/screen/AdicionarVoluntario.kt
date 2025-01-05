@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import pt.ipca.doamais.ui.theme.DoaTheme
+import pt.ipca.doamais.ui.theme.AppTheme
 
 @Composable
 fun AdicionarVoluntarioScreen(navController: NavController) {
@@ -73,7 +73,7 @@ fun AdicionarVoluntarioScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun AdicionarVoluntarioScreenPreview() {
-    DoaTheme {
+    AppTheme {
         AdicionarVoluntarioScreen(navController = NavController(context = LocalContext.current))
     }
 }

@@ -19,14 +19,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import pt.ipca.doamais.R
-import pt.ipca.doamais.ui.theme.DoaTheme
+import pt.ipca.doamais.ui.theme.AppTheme
 
 @Composable
 fun HomeScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFE0E0E0)) // Fundo cinza claro
+            //.background(Color(0xFFE0E0E0)) // Fundo cinza claro
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -51,13 +51,22 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                CustomButton("Estatísticas", Modifier.weight(1f)) {
-                    navController.navigate("estatisticas")
+                //CustomButton("Estatísticas", Modifier.weight(1f)) {
+                //    navController.navigate("estatisticas")
+                //}
+                Button(onClick = { navController.navigate("estatisticas") },
+                    modifier = Modifier
+                        .height(80.dp)
+                        .weight(1f),
+                    ) {
+                    Text("Estatísticas", fontSize = 16.sp)
                 }
                 Spacer(modifier = Modifier.width(16.dp))
-                CustomButton("Calendário", Modifier.weight(1f)) {
-                    navController.navigate("calendario")
-                }
+                Button(onClick = { navController.navigate("calendario") },
+                    modifier = Modifier
+                        .height(80.dp)
+                        .weight(1f),
+                    ) { Text("Calendário") }
             }
 
             // Segunda linha de botões
@@ -65,48 +74,40 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                CustomButton("Voluntários", Modifier.weight(1f)) {
+                Button(onClick = {
                     navController.navigate("voluntarios")
-                }
+                },
+                    modifier = Modifier
+                        .height(80.dp)
+                        .weight(1f),
+                ) { Text("Voluntários") }
                 Spacer(modifier = Modifier.width(16.dp))
-                CustomButton("Beneficiários", Modifier.weight(1f)) {
+                Button(onClick = {
                     navController.navigate("beneficiarios")
-                }
+                },
+                    modifier = Modifier
+                        .height(80.dp)
+                        .weight(1f),
+                ) { Text("Beneficiários") }
             }
 
             // Botão único na terceira linha
-            CustomButton("Levantamentos", Modifier.fillMaxWidth()) {
+            Button(onClick = {
                 navController.navigate("levantamentos")
-            }
+            },
+                modifier = Modifier
+                    .height(80.dp)
+                    .fillMaxWidth(),
+            ) { Text("Levantamentos") }
         }
     }
 }
 
-@Composable
-fun CustomButton(
-    text: String,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-) {
-    Button(
-        onClick = onClick,
-        modifier = modifier
-            .height(80.dp), // Altura fixa
-        shape = RoundedCornerShape(16.dp), // Cantos arredondados
-        contentPadding = PaddingValues(8.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF424242), // Cor de fundo (por exemplo, cinza escuro)
-            contentColor = Color.White // Cor do texto
-        )
-    ) {
-        Text(text, fontSize = 16.sp)
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    DoaTheme {
+    AppTheme {
         HomeScreen(navController = NavController(context = LocalContext.current)) // Para visualização prévia
     }
 }
