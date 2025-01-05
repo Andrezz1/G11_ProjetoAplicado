@@ -336,20 +336,19 @@ class TurnoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * 
      * 
      * @param turno  (optional)
-     * @return kotlin.Any
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun turnoPost(turno: Turno? = null) : kotlin.Any {
+    fun turnoPost(turno: Turno? = null) : Unit {
         val localVarResponse = turnoPostWithHttpInfo(turno = turno)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -367,16 +366,15 @@ class TurnoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * 
      * 
      * @param turno  (optional)
-     * @return ApiResponse<kotlin.Any?>
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun turnoPostWithHttpInfo(turno: Turno?) : ApiResponse<kotlin.Any?> {
+    fun turnoPostWithHttpInfo(turno: Turno?) : ApiResponse<Unit?> {
         val localVariableConfig = turnoPostRequestConfig(turno = turno)
 
-        return request<Turno, kotlin.Any>(
+        return request<Turno, Unit>(
             localVariableConfig
         )
     }
@@ -392,8 +390,7 @@ class TurnoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/Turno",
