@@ -28,9 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import pt.ipca.doamais.ui.theme.AppTheme
-import pt.ipca.doamais.ui.theme.DoaTheme
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
