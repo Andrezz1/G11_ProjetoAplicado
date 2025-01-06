@@ -1,4 +1,4 @@
-package pt.ipca.doamais.screen
+package pt.ipca.doamais.screen.turnos
 
 import android.content.Context
 import android.app.DatePickerDialog
@@ -27,6 +27,7 @@ import org.openapitools.client.infrastructure.ServerException
 import pt.ipca.doamais.R
 import pt.ipca.doamais.api.api.TurnoApi
 import pt.ipca.doamais.api.model.Turno
+import pt.ipca.doamais.screen.getCredentials
 import pt.ipca.doamais.ui.theme.AppTheme
 import java.text.SimpleDateFormat
 import java.time.OffsetDateTime

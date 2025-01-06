@@ -1,4 +1,4 @@
-package pt.ipca.doamais.screen
+package pt.ipca.doamais.screen.voluntarios
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -13,23 +13,27 @@ import androidx.navigation.NavController
 import pt.ipca.doamais.ui.theme.AppTheme
 
 @Composable
-fun LevantamentosScreen(navController: NavController) {
+fun VoluntariosScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
     ) {
-        // Título de Levantamentos
-        Text(text = "Levantamentos", modifier = Modifier.align(Alignment.CenterHorizontally))
+        // Título de Voluntários
+        Text(text = "Voluntários", modifier = Modifier.align(Alignment.CenterHorizontally))
 
-        // Botões para ações de levantamentos
-        Button(onClick = { navController.navigate("lista_levantamentos") }) {
-            Text("Ver Lista de Levantamentos")
+        // Botões para ações de voluntários
+        //Button(onClick = { navController.navigate("lista_voluntarios") }) {
+        //    Text("Ver Lista de Voluntários")
+        //}
+
+        Button(onClick = { navController.navigate("adicionar_voluntario") }) {
+            Text("Adicionar Voluntário")
         }
 
-        Button(onClick = { navController.navigate("adicionar_levantamento") }) {
-            Text("Adicionar Levantamento")
+        Button(onClick = { navController.navigate("disponibilidade") }) {
+            Text("Disponibilidade")
         }
 
         // Botão para voltar à Home
@@ -41,8 +45,8 @@ fun LevantamentosScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun LevantamentosScreenPreview() {
+fun VoluntariosScreenPreview() {
     AppTheme {
-        LevantamentosScreen(navController = NavController(context = LocalContext.current)) // Para visualização prévia
+        VoluntariosScreen(navController = NavController(context = LocalContext.current)) // Para visualização prévia
     }
 }

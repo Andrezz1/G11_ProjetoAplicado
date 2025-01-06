@@ -9,10 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,19 +17,19 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import pt.ipca.doamais.screen.Login
 import pt.ipca.doamais.screen.HomeScreen
-import pt.ipca.doamais.screen.BeneficiariosScreen
+import pt.ipca.doamais.screen.beneficiario.BeneficiariosScreen
 import pt.ipca.doamais.screen.CalendarioScreen
 import pt.ipca.doamais.screen.EstatisticasScreen
-import pt.ipca.doamais.screen.LevantamentosScreen
-import pt.ipca.doamais.screen.VoluntariosScreen
-import pt.ipca.doamais.screen.ListaBeneficiariosScreen
-import pt.ipca.doamais.screen.AdicionarBeneficiarioScreen
-import pt.ipca.doamais.screen.ListaLevantamentosScreen
-import pt.ipca.doamais.screen.AdicionarLevantamentoScreen
-import pt.ipca.doamais.screen.AdicionarVoluntarioScreen
-import pt.ipca.doamais.screen.CriarTurnosScreen
-import pt.ipca.doamais.screen.DisponibilidadeScreen
-import pt.ipca.doamais.screen.EditBeneficiarioScreen
+import pt.ipca.doamais.screen.levantamentos.LevantamentosScreen
+import pt.ipca.doamais.screen.voluntarios.VoluntariosScreen
+import pt.ipca.doamais.screen.beneficiario.ListaBeneficiariosScreen
+import pt.ipca.doamais.screen.beneficiario.AdicionarBeneficiarioScreen
+import pt.ipca.doamais.screen.levantamentos.ListaLevantamentosScreen
+import pt.ipca.doamais.screen.levantamentos.AdicionarLevantamentoScreen
+import pt.ipca.doamais.screen.voluntarios.AdicionarVoluntarioScreen
+import pt.ipca.doamais.screen.turnos.CriarTurnosScreen
+import pt.ipca.doamais.screen.turnos.TurnoScreen
+import pt.ipca.doamais.screen.beneficiario.EditBeneficiarioScreen
 import pt.ipca.doamais.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -133,7 +130,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable("disponibilidade") {
-                            DisponibilidadeScreen(navController = navController)
+                            TurnoScreen()
                         }
 
                         composable(

@@ -1,4 +1,4 @@
-package pt.ipca.doamais.screen
+package pt.ipca.doamais.screen.beneficiario
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -15,8 +15,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.testing.TestNavHostController
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import pt.ipca.doamais.R // Certifique-se de usar o nome correto do pacote do projeto

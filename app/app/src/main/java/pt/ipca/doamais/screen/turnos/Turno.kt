@@ -1,4 +1,4 @@
-package pt.ipca.doamais.screen
+package pt.ipca.doamais.screen.turnos
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -14,7 +14,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,17 +22,15 @@ import org.openapitools.client.infrastructure.ApiClient
 import org.openapitools.client.infrastructure.ClientException
 import org.openapitools.client.infrastructure.ServerException
 import pt.ipca.doamais.R
-import pt.ipca.doamais.api.api.BeneficiariosApi
 import pt.ipca.doamais.api.api.TurnoApi
-import pt.ipca.doamais.api.model.Beneficiario
 import pt.ipca.doamais.api.model.Turno
+import pt.ipca.doamais.screen.getCredentials
 import pt.ipca.doamais.ui.theme.AppTheme
 import java.util.Base64
 
 @Composable
-fun DisponibilidadeScreen(navController: NavController) {
+fun TurnoScreen() {
     var turnos by remember { mutableStateOf<List<Turno>>(emptyList()) }
-    var searchQuery by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     val context = LocalContext.current
 
@@ -176,6 +173,6 @@ fun fetchTurnos(
 @Composable
 fun PreviewDisponibilidadeScreen() {
     AppTheme {
-        DisponibilidadeScreen(navController = NavController(context = LocalContext.current))
+        TurnoScreen()
     }
 }

@@ -1,4 +1,4 @@
-package pt.ipca.doamais.screen
+package pt.ipca.doamais.screen.beneficiario
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -25,6 +25,7 @@ import org.openapitools.client.infrastructure.ServerException
 import pt.ipca.doamais.R
 import pt.ipca.doamais.api.api.BeneficiariosApi
 import pt.ipca.doamais.api.model.Beneficiario
+import pt.ipca.doamais.screen.getCredentials
 import pt.ipca.doamais.ui.theme.AppTheme
 import java.util.Base64
 

@@ -1,4 +1,4 @@
-package pt.ipca.doamais.screen
+package pt.ipca.doamais.screen.levantamentos
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.openapitools.client.infrastructure.ApiClient
 import org.openapitools.client.infrastructure.ClientException
 import org.openapitools.client.infrastructure.ServerException
+import pt.ipca.doamais.screen.getCredentials
 import pt.ipca.doamais.ui.theme.AppTheme
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
