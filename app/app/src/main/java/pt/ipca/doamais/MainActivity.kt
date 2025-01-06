@@ -29,7 +29,6 @@ import pt.ipca.doamais.screen.ListaBeneficiariosScreen
 import pt.ipca.doamais.screen.AdicionarBeneficiarioScreen
 import pt.ipca.doamais.screen.ListaLevantamentosScreen
 import pt.ipca.doamais.screen.AdicionarLevantamentoScreen
-import pt.ipca.doamais.screen.ListaVoluntariosScreen
 import pt.ipca.doamais.screen.AdicionarVoluntarioScreen
 import pt.ipca.doamais.screen.CriarTurnosScreen
 import pt.ipca.doamais.screen.DisponibilidadeScreen
@@ -100,13 +99,13 @@ class MainActivity : ComponentActivity() {
                         }
 
                         // Add screens for "lista_voluntarios" and "adicionar_voluntario" if needed
-                        composable("lista_voluntarios") {
-                            Text(text = "Lista de Voluntários", modifier = Modifier.fillMaxWidth())
-                        }
-
-                        composable("adicionar_voluntario") {
-                            Text(text = "Adicionar Voluntário", modifier = Modifier.fillMaxWidth())
-                        }
+                        //composable("lista_voluntarios") {
+                        //    Text(text = "Lista de Voluntários", modifier = Modifier.fillMaxWidth())
+                        //}
+//
+                        //composable("adicionar_voluntario") {
+                        //    Text(text = "Adicionar Voluntário", modifier = Modifier.fillMaxWidth())
+                        //}
 
                         composable("lista_beneficiarios") {
                             ListaBeneficiariosScreen(navController = navController)
@@ -124,9 +123,6 @@ class MainActivity : ComponentActivity() {
                             AdicionarLevantamentoScreen(navController = navController)
                         }
 
-                        composable("lista_voluntarios") {
-                            ListaVoluntariosScreen(navController = navController)
-                        }
 
                         composable("adicionar_voluntario") {
                             AdicionarVoluntarioScreen(navController = navController)

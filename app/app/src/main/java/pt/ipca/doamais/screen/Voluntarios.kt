@@ -24,9 +24,9 @@ fun VoluntariosScreen(navController: NavController) {
         Text(text = "Voluntários", modifier = Modifier.align(Alignment.CenterHorizontally))
 
         // Botões para ações de voluntários
-        Button(onClick = { navController.navigate("lista_voluntarios") }) {
-            Text("Ver Lista de Voluntários")
-        }
+        //Button(onClick = { navController.navigate("lista_voluntarios") }) {
+        //    Text("Ver Lista de Voluntários")
+        //}
 
         Button(onClick = { navController.navigate("adicionar_voluntario") }) {
             Text("Adicionar Voluntário")
